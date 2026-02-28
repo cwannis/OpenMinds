@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OpenMinds</string>
+    <string name = "title_login">Log In</string>
+    <string name = "edit_text_mail">Email</string>
 </resources>
