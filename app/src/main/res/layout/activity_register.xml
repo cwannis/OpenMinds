@@ -6,21 +6,164 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".LogInActivity"
+    android:background="@color/white"
     >
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="25sp"
-        android:gravity="center_horizontal"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_weight="1"
-        android:textSize="40sp"
-        android:fontFamily="@font/nunito"
-        android:textStyle="bold"
-        android:text="@string/register" />
+        android:orientation="vertical"
+        android:layout_marginBottom="20sp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25sp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/register_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_marginTop="35sp"
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_arrondi"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/name_edit_text"
+            android:layout_marginEnd="15sp"
+            android:layout_marginStart="15sp"
+            android:textColorHint="@color/text_hint_color"
+            android:padding="15sp"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:layout_marginTop="15sp"
+            android:id="@+id/editTextTextEmailAddress2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_arrondi"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/edit_text_mail"
+            android:layout_marginEnd="15sp"
+            android:layout_marginStart="15sp"
+            android:textColorHint="@color/text_hint_color"
+            android:padding="15sp"
+            android:textColor="@color/black"
+            />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp">
+
+            <EditText
+                android:id="@+id/mdpTextTextEmailAddress2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_arrondi"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/psw_text_mail"
+                android:textColorHint="@color/text_hint_color"
+                android:textColor="@color/black"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:paddingEnd="60dp" />
+            <TextView
+                android:id="@+id/monBoutonTexteA_Droite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="15dp"
+                android:text="@string/show"
+                android:textColor="@color/purple"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+        <EditText
+            android:layout_marginTop="15sp"
+            android:id="@+id/Organisation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_arrondi"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/organization_edit_text"
+            android:layout_marginEnd="15sp"
+            android:layout_marginStart="15sp"
+            android:textColorHint="@color/text_hint_color"
+            android:padding="15sp"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="25sp">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accept_processing_data"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_of_use"
+            android:textColor="@color/purple"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_text_size"/>
+        <Button
+            android:id="@+id/button"
+            android:background="@drawable/button"
+            app:backgroundTint="@color/purple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="4sp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/no_account"
+                android:textSize="@dimen/default_text_size"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:layout_marginStart="5sp"
+                android:textColor="@color/purple"
+                android:textStyle="bold"
+                android:textSize="@dimen/default_text_size"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
 </LinearLayout>
