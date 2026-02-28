@@ -7,4 +7,11 @@ function userExists($mail, $bdd)
     $userexist->execute(array($mail));
     return $userexist->rowCount() > 0;
 }
+
+function userExistsPassword($mail, $bdd, $password)
+{
+    $userexist = $bdd->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
+    $userexist->execute(array($mail, $password));
+    return $userexist->rowCount() > 0;
+}
 ?>
