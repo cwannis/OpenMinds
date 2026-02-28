@@ -10,7 +10,7 @@ if(!empty($mail)){
         echo json_encode($user->fetchAll(PDO::FETCH_ASSOC));
     } else
     {
-        echo json_encode("utilisateur inexistant");
+        echo json_encode(["erreur" => "utilisateur inexistant"]);
     }
 }
 ?>
