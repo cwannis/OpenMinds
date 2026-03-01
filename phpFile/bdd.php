@@ -1,11 +1,12 @@
 <?php
+require_once("Api.php");
 $headers = getallheaders();
 
 // 3. Vérifier si la clé est présente et valide
-if (!isset($headers['X-Api-Key']) || $headers['X-Api-Key'] !== MON_API_KEY_SECRETE) {
+if (!isset($headers['X-Api-Key']) || $headers['X-Api-Key'] !== API_KEY) {
     // Si la clé est fausse ou absente, on bloque tout !
     http_response_code(401); // Erreur 401 : Non autorisé
-    echo json_encode(["erreur" => "Accès refusé : Clé API invalide."]);
+    echo json_encode(["erreur" => "Acces refuse : Cle API invalide."]);
     exit(); // On arrête l'exécution du script ici
 }
 

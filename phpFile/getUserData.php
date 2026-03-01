@@ -1,5 +1,6 @@
 <?php
 require_once("bdd.php");
+header('Content-Type: application/json');
 $mail = $_GET['email'];
 $mdp = sha1($_GET['password']);
 if(!empty($mail)){
@@ -10,6 +11,7 @@ if(!empty($mail)){
         echo json_encode($user->fetchAll(PDO::FETCH_ASSOC));
     } else
     {
+        http_response_code(401);
         echo json_encode(["erreur" => "utilisateur inexistant"]);
     }
 }
