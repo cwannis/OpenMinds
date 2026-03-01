@@ -106,28 +106,32 @@
             android:textStyle="bold"
             android:fontFamily="@font/nunito"
             android:textSize="@dimen/default_text_size"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="4sp"
             android:gravity="center"
-            android:layout_marginTop="4sp">
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:fontFamily="@font/nunito"
                 android:text="@string/no_account"
-                android:fontFamily="@font/nunito"
-                android:textSize="@dimen/default_text_size"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_text_size" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
                 android:layout_marginStart="5sp"
-                android:textColor="@color/purple"
-                android:textStyle="bold"
                 android:fontFamily="@font/nunito"
-                android:textSize="@dimen/default_text_size"/>
+                android:text="@string/register"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/default_text_size"
+                android:onClick="goToRegister"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

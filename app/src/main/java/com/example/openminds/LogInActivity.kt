@@ -1,6 +1,6 @@
 package com.example.openminds
 
-import android.bluetooth.BluetoothHidDevice
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,7 +21,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.launch
 import io.ktor.serialization.gson.*
-import io.ktor.client.plugins.contentnegotiation.*
+
 class LogInActivity : AppCompatActivity() {
     private val client = HttpClient(Android) {
         install(ContentNegotiation) {
@@ -72,6 +72,15 @@ class LogInActivity : AppCompatActivity() {
                         val user = users[0]
                         Log.i("API_RES", "utilisateur " + user.name)
                         Toast.makeText(this@LogInActivity, "Bienvenue ${user.name}", Toast.LENGTH_SHORT).show()
+                        val sharedPref = getSharedPreferences("OpenMindsPrefs", MODE_PRIVATE)
+
+                        // 2. ENREGISTRE LES INFOS
+                        with(sharedPref.edit()) {
+                            putInt("USER_ID", user.id)
+                            putString("USER_NAME", user.name)
+                            putBoolean("IS_LOGGED", true)
+                            apply()
+                        }
                     }
                 } else
                 {
@@ -85,4 +94,12 @@ class LogInActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun goToRegister(view: View) {
+        val i = Intent(this, RegisterActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
+
 }
