@@ -68,7 +68,7 @@
             android:layout_marginStart="15dp">
 
             <EditText
-                android:id="@+id/mdpTextTextEmailAddress2"
+                android:id="@+id/pswEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_arrondi"
@@ -137,7 +137,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/default_text_size"/>
         <Button
-            android:id="@+id/button"
+            android:id="@+id/signUpButton"
             android:background="@drawable/button"
             app:backgroundTint="@color/purple"
             android:layout_width="match_parent"
