@@ -52,7 +52,7 @@
             android:layout_marginStart="15dp">
 
             <EditText
-                android:id="@+id/mdpTextTextEmailAddress2"
+                android:id="@+id/mdpText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_arrondi"
