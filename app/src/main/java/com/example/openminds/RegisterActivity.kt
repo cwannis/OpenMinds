@@ -3,6 +3,8 @@ package com.example.openminds
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -16,13 +18,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.header
-import io.ktor.client.request.post
-import io.ktor.client.statement.HttpResponse
-import io.ktor.serialization.gson.gson
 import kotlinx.coroutines.launch
 import android.util.Patterns
+import android.widget.TextView
+import androidx.core.view.PointerIconCompat.TYPE_TEXT
 
 class RegisterActivity : AppCompatActivity() {
     private val client = HttpClient(Android)
@@ -45,9 +44,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun isEmailValid(email: String): Boolean {
-        return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
+
 
     fun goToLogIn(view: View) {
         val i = Intent(this, LogInActivity::class.java)
@@ -81,6 +78,22 @@ class RegisterActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             signUp(this@RegisterActivity, nameValue, emailValue, pswValue, orga)
+        }
+    }
+
+    fun showButton(view: View) {
+        val input = findViewById<EditText>(R.id.pswEdit)
+        val text = findViewById<TextView>(R.id.showButton)
+        Log.i("PASSWORD HIDE", input.inputType.toString())
+        if(input.inputType == InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD)
+        {
+            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT
+            text.text = "hide"
+        }
+        else
+        {
+            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
+            text.text = "show"
         }
     }
 }

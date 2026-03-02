@@ -18,4 +18,11 @@
     <string name="filter">Filter</string>
     <string name="content">Content</string>
     <string name="search">Search</string>
+    <string name="forget_password">Forget password</string>
+    <string name="validation_code">Validation code</string>
+    <string name="valider">valider</string>
+    <string name="we_have_send_you_a_validation_code_by_email_please_enter_hit">We have send you a validation code by email please enter hit</string>
+    <string name="reset_password">reset password</string>
+    <string name="enter_new_password">please enter a new password</string>
+    <string name="new_password">new password</string>
 </resources>
