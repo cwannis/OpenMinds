@@ -18,6 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/gray" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
         <TextView
             android:id="@+id/tvTitre"
             android:layout_marginStart="7sp"
@@ -48,6 +53,7 @@
             android:fontFamily="@font/nunito"
             android:text = "8m ago"
             />
+        </LinearLayout>
 
 
     </LinearLayout>
