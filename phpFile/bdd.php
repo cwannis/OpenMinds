@@ -12,7 +12,7 @@ if (!isset($headers['X-Api-Key']) || $headers['X-Api-Key'] !== API_KEY) {
 
 $bdd = new PDO("mysql:dbname=openminds;host=127.0.0.1", 'root', '');
 
-function userExists($mail, $bdd)
+function mailExists($mail, $bdd)
 {
     $userexist = $bdd->prepare("SELECT * FROM user WHERE email = ?");
     $userexist->execute(array($mail));
