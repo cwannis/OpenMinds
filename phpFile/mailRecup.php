@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 $code = htmlspecialchars($_GET['code']);
 $mailTo = htmlspecialchars($_GET['mailTo']);
 
-if(mailExists($mailTo, $code)) {
+if(mailExists($mailTo, $bdd)) {
     try {
         $mail = new PHPMailer();
         $mail->isSMTP();
