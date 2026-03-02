@@ -13,4 +13,9 @@
     <string name="sign_up">Sign up</string>
     <string name="terms_of_use">Read the terms of use</string>
     <string name="accept_processing_data">I accept the processing of my data and the terms of use</string>
+    <string name="sign_in">sign in</string>
+    <string name="back">Back</string>
+    <string name="filter">Filter</string>
+    <string name="content">Content</string>
+    <string name="search">Search</string>
 </resources>
