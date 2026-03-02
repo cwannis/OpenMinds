@@ -7,4 +7,5 @@
     <color name = "text_hint_color">#B3B1B1</color>
     <color name = "purple">#A160FB</color>
     <color name = "gray">#DEDEDE</color>
+    <color name = "dark_gray">#C2C2C2</color>
 </resources>
