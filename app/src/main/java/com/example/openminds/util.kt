@@ -55,12 +55,10 @@ fun login(context: Context, user: User)
 suspend fun login(context: Context, mail : String, psw : String)
 {
     val response: HttpResponse = client.post(baseUrl + "getUserData.php") {
-        // On ajoute tes paramètres
         url {
             parameters.append("email", mail)
             parameters.append("password", psw)
         }
-        // On ajoute ta clé API de sécurité [cite: 73]
         header("X-Api-Key", BuildConfig.API_KEY)
     }
 
