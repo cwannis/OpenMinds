@@ -27,6 +27,11 @@ class LogInActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        if(isLogged(this))
+        {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun login(view: View) {
         lifecycleScope.launch {
