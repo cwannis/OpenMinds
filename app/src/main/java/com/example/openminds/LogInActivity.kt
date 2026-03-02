@@ -2,12 +2,16 @@ package com.example.openminds
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.PointerIconCompat.TYPE_TEXT
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +54,32 @@ class LogInActivity : AppCompatActivity() {
         val i = Intent(this, RegisterActivity::class.java)
         startActivity(i)
         finish()
+    }
+
+    fun showButton(view: View) {
+        val input = findViewById<EditText>(R.id.mdpText)
+        val text = findViewById<TextView>(R.id.showPasswordButton)
+        Log.i("PASSWORD HIDE", input.inputType.toString())
+        if(input.inputType == InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD)
+        {
+            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT
+            text.text = "hide"
+        }
+        else
+        {
+            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
+            text.text = "show"
+        }
+    }
+
+    fun goToResetPswCode(view: View) {
+        val emailInput = findViewById<EditText>(R.id.editTextTextEmailAddress2).text.toString()
+        if(emailInput.isNotEmpty() && isEmailValid(emailInput)) {
+            val intent = Intent(this, ResetPswCode::class.java)
+            intent.putExtra("mail", emailInput)
+            startActivity(intent)
+            finish()
+        }
     }
 
 

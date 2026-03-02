@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.core.content.edit
 import io.ktor.client.HttpClient
@@ -113,3 +114,36 @@ suspend fun signUp(context: Context, nameValue : String, emailValue : String, ps
     }
 }
 
+fun isEmailValid(email: String): Boolean {
+    return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+}
+
+suspend fun sendCodeMail(code : String, mail : String)
+{
+    val response1: HttpResponse =
+        client.post(baseUrl + "mailRecup.php") {
+            url {
+                parameters.append("code", code)
+                parameters.append("mailTo", mail)
+            }
+            header("X-Api-Key", BuildConfig.API_KEY)
+        }
+    val contenu = response1.bodyAsText()
+    Log.d("API_RES", "Réponse du serveur : $contenu")
+}
+
+suspend fun changePassword(context: Context, mail: String, psw: String)
+{
+    val response1: HttpResponse =
+        client.post(baseUrl + "changePassword.php") {
+            url {
+                parameters.append("email", mail)
+                parameters.append("newpsw", psw)
+            }
+            header("X-Api-Key", BuildConfig.API_KEY)
+        }
+    val contenu = response1.bodyAsText()
+    Log.d("API_RES", "Réponse du serveur : $contenu")
+    val intent = Intent(context, LogInActivity::class.java)
+    context.startActivity(intent)
+}

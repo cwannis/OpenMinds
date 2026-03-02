@@ -15,6 +15,12 @@
         android:theme="@style/Theme.OpenMinds"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPswCode"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -28,10 +34,10 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LogInActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
