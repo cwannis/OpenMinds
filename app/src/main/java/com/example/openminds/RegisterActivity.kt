@@ -80,37 +80,7 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
         lifecycleScope.launch {
-            val response: HttpResponse =
-                client.post("http://10.0.2.2/openMinds/phpFile/mailExist.php") {
-                    url {
-                        parameters.append("email", emailValue)
-                    }
-                    header("X-Api-Key", BuildConfig.API_KEY)
-                }
-            if(response.status.value == 401)
-            {
-                Toast.makeText(this@RegisterActivity, "ce mail est deja utilise par un autre utilisateur", Toast.LENGTH_SHORT).show()
-                return@launch
-            }
-            val response1: HttpResponse =
-                client.post("http://10.0.2.2/openMinds/phpFile/createUser.php") {
-                    url {
-                        parameters.append("name", nameValue)
-                        parameters.append("mail", emailValue)
-                        parameters.append("password", pswValue)
-                        parameters.append("organization", orga)
-                    }
-                    header("X-Api-Key", BuildConfig.API_KEY)
-                }
-                if(response1.status.value == 401)
-                {
-                    Toast.makeText(this@RegisterActivity, "ce mail est deja utilise par un autre utilisateur", Toast.LENGTH_SHORT).show()
-                    return@launch
-                } else
-                {
-                    Toast.makeText(this@RegisterActivity, "utilisateur cree", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
+            signUp(this@RegisterActivity, nameValue, emailValue, pswValue, orga)
         }
     }
 }

@@ -21,6 +21,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.launch
 import io.ktor.serialization.gson.*
+import androidx.core.content.edit
 
 class LogInActivity : AppCompatActivity() {
     private val client = HttpClient(Android) {
@@ -51,42 +52,7 @@ class LogInActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                // Ta requête POST en 3 lignes
-                val response: HttpResponse = client.post("http://10.0.2.2/openMinds/phpFile/getUserData.php") {
-                    // On ajoute tes paramètres
-                    url {
-                        parameters.append("email", emailValue)
-                        parameters.append("password", passwordValue)
-                    }
-                    // On ajoute ta clé API de sécurité [cite: 73]
-                    header("X-Api-Key", BuildConfig.API_KEY)
-                }
-
-                val contenu = response.bodyAsText()
-                Log.d("API_RES", "Réponse du serveur : $contenu")
-
-                if(response.status.value == 200)
-                {
-                    val users = response.body<List<User>>();
-                    if(users.isNotEmpty()) {
-                        val user = users[0]
-                        Log.i("API_RES", "utilisateur " + user.name)
-                        Toast.makeText(this@LogInActivity, "Bienvenue ${user.name}", Toast.LENGTH_SHORT).show()
-                        val sharedPref = getSharedPreferences("OpenMindsPrefs", MODE_PRIVATE)
-
-                        // 2. ENREGISTRE LES INFOS
-                        with(sharedPref.edit()) {
-                            putInt("USER_ID", user.id)
-                            putString("USER_NAME", user.name)
-                            putBoolean("IS_LOGGED", true)
-                            apply()
-                        }
-                    }
-                } else
-                {
-                    Toast.makeText(this@LogInActivity, "le mail ou le mot de passe est incorect", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
+                login(this@LogInActivity, emailValue, passwordValue)
 
             } catch (e: Exception) {
                 Log.e("API_ERR", "Erreur : ${e.message}")
