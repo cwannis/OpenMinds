@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ResetPswCode">
+    tools:context=".ResetPswCode"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="match_parent"
@@ -44,6 +45,8 @@
         android:id="@+id/validationCodeEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_gray"
         android:ems="10"
         android:inputType="number"
         android:hint="@string/validation_code"
