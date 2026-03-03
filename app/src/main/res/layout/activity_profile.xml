@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="250sp"
         android:background="@color/purple"
-        >
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,19 +52,47 @@
                 android:text="@string/logout"
                 android:textSize="@dimen/default_text_size" />
 
+
         </LinearLayout>
 
 
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="210sp"
+        android:background="@drawable/pp_border"
+        android:translationY="-100sp"
+        android:layout_height="210sp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/myCardView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            >
+
+            <ImageView
+                android:id="@+id/roundedimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:translationY="-70dp">
     <TextView
         android:id="@+id/ProfileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
         android:gravity="center"
-        android:layout_marginTop="30sp"
         android:textSize="@dimen/title_size"
         android:fontFamily="@font/nunito"
         android:textColor="@color/black"
@@ -99,6 +127,7 @@
             android:textStyle="bold"
             android:text="Badges"
             android:textSize="20sp" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -106,6 +135,9 @@
         android:layout_marginTop="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
 
 

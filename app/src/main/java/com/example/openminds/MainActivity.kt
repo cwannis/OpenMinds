@@ -1,5 +1,6 @@
 package com.example.openminds
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -35,5 +36,11 @@ class MainActivity : AppCompatActivity() {
 
     fun logOut(view: View) {
         logout(this)
+    }
+
+    fun goToProfile(view: View) {
+        val intent = Intent(this, profileActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
