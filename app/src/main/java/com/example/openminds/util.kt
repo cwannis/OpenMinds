@@ -53,6 +53,28 @@ fun login(context: Context, user: User)
     context.startActivity(intent)
 }
 
+suspend fun getAllForm(context: Context) : List<Formation>
+{
+    val response: HttpResponse = client.post(baseUrl + "getAllFormation.php") {
+        url {
+        }
+        header("X-Api-Key", BuildConfig.API_KEY)
+    }
+
+    val contenu = response.bodyAsText()
+    Log.d("API_RES", "Réponse du serveur : $contenu")
+
+    if(response.status.value == 200)
+    {
+        val formations = response.body<List<Formation>>();
+        return formations
+    }
+    else
+    {
+        return ArrayList<Formation>()
+    }
+}
+
 suspend fun login(context: Context, mail : String, psw : String)
 {
     val response: HttpResponse = client.post(baseUrl + "getUserData.php") {
@@ -147,3 +169,4 @@ suspend fun changePassword(context: Context, mail: String, psw: String)
     val intent = Intent(context, LogInActivity::class.java)
     context.startActivity(intent)
 }
+
