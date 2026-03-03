@@ -1,14 +1,14 @@
 <?php
 require_once("bdd.php");
 header('Content-Type: application/json');
-$mail = $_GET['email'];
-$mdp = sha1($_GET['password']);
+if(isset($_GET['email'])) $mail = $_GET['email'];
+if(isset($_GET['password'])) $mdp = sha1($_GET['password']);
 if(isset($_GET['id'])) $id = $_GET['id'];
 
 if(!empty($mail) && !empty($mdp)){
     if(userExistsPassword($mail, $bdd, $mdp))
     {
-        $user = $bdd->prepare("SELECT id, name, email, organization FROM user WHERE email = ?");
+        $user = $bdd->prepare("SELECT id, name, email, organization, ppLink FROM user WHERE email = ?");
         $user->execute(array($mail));
         echo json_encode($user->fetchAll(PDO::FETCH_ASSOC));
     } else
@@ -18,6 +18,8 @@ if(!empty($mail) && !empty($mdp)){
     }
 }elseif (!empty($id))
 {
-    //TODO revoye les donne user avec l'id
+    $user = $bdd->prepare("SELECT id, name, email, organization, ppLink FROM user WHERE id = ?");
+    $user->execute(array($id));
+    echo json_encode($user->fetchAll(PDO::FETCH_ASSOC));
 }
 ?>
