@@ -101,6 +101,24 @@ suspend fun login(context: Context, mail : String, psw : String)
     }
 }
 
+suspend fun getUserData(context: Context, id : Int) : User{
+    val response: HttpResponse = client.post(baseUrl + "getUserData.php") {
+        url {
+            parameters.append("id", id.toString())
+        }
+        header("X-Api-Key", BuildConfig.API_KEY)
+    }
+
+    val contenu = response.bodyAsText()
+    Log.d("API_RES", "Réponse du serveur : $contenu")
+    val users = response.body<List<User>>();
+    if(users.isNotEmpty()) {
+        val user = users[0]
+           return user
+    }
+    return User(-1, "", "", "", "")
+}
+
 suspend fun signUp(context: Context, nameValue : String, emailValue : String, pswValue : String, orga : String)
 {
     val response: HttpResponse =

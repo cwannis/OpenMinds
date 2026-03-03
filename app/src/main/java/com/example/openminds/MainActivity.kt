@@ -40,7 +40,15 @@ class MainActivity : AppCompatActivity() {
 
     fun goToProfile(view: View) {
         val intent = Intent(this, profileActivity::class.java)
-        startActivity(intent)
-        finish()
+        val sharedPref = getSharedPreferences("OpenMindsPrefs", MODE_PRIVATE)
+        val id =  sharedPref.getInt("USER_ID", 0)
+        lifecycleScope.launch {
+            val user = getUserData(this@MainActivity, id)
+            intent.putExtra("nom", user.name)
+            intent.putExtra("orga", user.organization)
+            intent.putExtra("pp", user.ppLink)
+            startActivity(intent)
+            finish()
+        }
     }
 }
