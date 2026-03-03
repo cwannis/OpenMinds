@@ -16,10 +16,12 @@ fun formatTimeAgo(timestamp: Long): String {
     val minutes = seconds / 60
     val hours = minutes / 60
     val days = hours / 24
+    val months = days / 30
     val years = days / 365
 
     return when {
         years > 0 -> "${years}y ago"
+        months > 0 -> "${months} months ago"
         days > 0 -> "${days}d ago"
         hours > 0 -> "${hours}h ago"
         minutes > 0 -> "${minutes}m ago"
