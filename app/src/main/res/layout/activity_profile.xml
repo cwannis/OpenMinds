@@ -42,7 +42,7 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/textViewFilter"
+                android:id="@+id/logoutText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
