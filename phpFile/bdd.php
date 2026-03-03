@@ -10,7 +10,20 @@ if (!isset($headers['X-Api-Key']) || $headers['X-Api-Key'] !== API_KEY) {
     exit(); // On arrête l'exécution du script ici
 }
 
-$bdd = new PDO("mysql:dbname=openminds;host=127.0.0.1", 'root', '');
+$dbHost = getenv("OPENMINDS_DB_HOST") ?: "db";
+$dbName = getenv("OPENMINDS_DB_NAME") ?: "openminds";
+$dbUser = getenv("OPENMINDS_DB_USER") ?: "openminds";
+$dbPass = getenv("OPENMINDS_DB_PASSWORD") ?: "openminds";
+
+$bdd = new PDO(
+    "mysql:dbname={$dbName};host={$dbHost};charset=utf8mb4",
+    $dbUser,
+    $dbPass,
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]
+);
 
 function mailExists($mail, $bdd)
 {

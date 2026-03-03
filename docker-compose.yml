@@ -1,0 +1,39 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: openminds-web
+    ports:
+      - "8080:80"
+    environment:
+      OPENMINDS_DB_HOST: db
+      OPENMINDS_DB_NAME: openminds
+      OPENMINDS_DB_USER: openminds
+      OPENMINDS_DB_PASSWORD: openminds
+      OPENMINDS_API_KEY: testAPIKEY
+    volumes:
+      - ./:/var/www/html/openMinds
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11.4
+    container_name: openminds-db
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: openminds
+      MARIADB_USER: openminds
+      MARIADB_PASSWORD: openminds
+    volumes:
+      - openminds_db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  openminds_db_data:

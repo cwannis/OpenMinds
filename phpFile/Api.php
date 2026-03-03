@@ -1,3 +1,8 @@
 <?php
-define("API_KEY", "testAPIKEY");
+$apiKey = getenv("OPENMINDS_API_KEY");
+if (!$apiKey) {
+    $apiKey = "testAPIKEY";
+}
+
+define("API_KEY", $apiKey);
 ?>
