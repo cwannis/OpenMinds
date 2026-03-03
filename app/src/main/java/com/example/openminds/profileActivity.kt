@@ -27,7 +27,12 @@ class profileActivity : AppCompatActivity() {
             logout(this)
 
         }
+        updatePP()
+        updateText()
+    }
 
+    fun updatePP()
+    {
         val roundedimag :(ImageView) = findViewById(R.id.roundedimage);
         var ppLink=  intent.extras?.getString("pp")
 
@@ -41,5 +46,17 @@ class profileActivity : AppCompatActivity() {
         Glide.with(getApplicationContext())
             .load(ppLink)
             .into(roundedimag);
+    }
+
+    fun updateText()
+    {
+        val profileName = findViewById<TextView>(R.id.ProfileName)
+        val profileOrganization = findViewById<TextView>(R.id.ProfileOrganization)
+        val name = intent.extras?.getString("nom")
+        val orga = intent.extras?.getString("orga")
+        if (!name.isNullOrEmpty() && !orga.isNullOrEmpty()) {
+            profileName.text = name
+            profileOrganization.text = orga
+        }
     }
 }
