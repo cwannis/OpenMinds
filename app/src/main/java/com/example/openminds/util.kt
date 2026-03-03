@@ -18,7 +18,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.serialization.gson.gson
 
-public val baseUrl : String = "http://10.0.2.2/openMinds/phpFile/"
+public val baseUrl : String = "http://10.0.2.2:8080/openMinds/phpFile/"
 private val client = HttpClient(Android) {
     install(ContentNegotiation) {
         gson()
@@ -113,8 +113,8 @@ suspend fun getUserData(context: Context, id : Int) : User{
     Log.d("API_RES", "Réponse du serveur : $contenu")
     val users = response.body<List<User>>();
     if(users.isNotEmpty()) {
-        val user = users[0]
-           return user
+        val user = users[0];
+        return user
     }
     return User(-1, "", "", "", "")
 }
@@ -187,4 +187,3 @@ suspend fun changePassword(context: Context, mail: String, psw: String)
     val intent = Intent(context, LogInActivity::class.java)
     context.startActivity(intent)
 }
-

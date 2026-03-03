@@ -32,10 +32,10 @@ function mailExists($mail, $bdd)
     return $userexist->rowCount() > 0;
 }
 
-function userExistsPassword($mail, $bdd, $password)
+function userExistsPassword($identifier, $bdd, $password)
 {
-    $userexist = $bdd->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
-    $userexist->execute(array($mail, $password));
+    $userexist = $bdd->prepare("SELECT * FROM user WHERE (email = ? OR name = ?) AND password = ?");
+    $userexist->execute(array($identifier, $identifier, $password));
     return $userexist->rowCount() > 0;
 }
 ?>

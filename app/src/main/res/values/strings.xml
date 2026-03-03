@@ -2,6 +2,7 @@
     <string name="app_name">OpenMinds</string>
     <string name="title_login">Log In</string>
     <string name="edit_text_mail">Email</string>
+    <string name="login_identifier_hint">Email or username</string>
     <string name="psw_text_mail">Password</string>
     <string name="psw_forgot_text">Forgot your password ?</string>
     <string name="show">show</string>

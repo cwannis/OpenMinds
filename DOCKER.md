@@ -60,3 +60,4 @@ or:
 - `phpFile/bdd.php` now reads DB credentials from env vars.
 - `phpFile/Api.php` now reads API key from env vars.
 - Initial tables are created by `docker/mysql/init/01-schema.sql`.
+- Default seeded user: `admin@openminds.local` / `admin`.

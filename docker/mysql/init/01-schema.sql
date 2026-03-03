@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS user (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   organization VARCHAR(255) NOT NULL,
+  ppLink TEXT,
   PRIMARY KEY (id),
   UNIQUE KEY uniq_user_email (email)
 );
@@ -16,3 +17,10 @@ CREATE TABLE IF NOT EXISTS formation (
   imageUrl TEXT,
   PRIMARY KEY (id)
 );
+
+INSERT INTO user (name, email, password, organization)
+VALUES ('admin', 'admin@openminds.local', SHA1('admin'), 'OpenMinds')
+ON DUPLICATE KEY UPDATE
+  name = VALUES(name),
+  password = VALUES(password),
+  organization = VALUES(organization);
