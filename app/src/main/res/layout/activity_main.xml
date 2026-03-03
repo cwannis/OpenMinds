@@ -48,6 +48,7 @@
             android:fontFamily="@font/nunito"
             android:textStyle="bold"
             android:textColor="@color/purple"
+            android:onClick="goToProfile"
             android:gravity="end"
             android:text="@string/filter"
             android:textSize="@dimen/default_text_size" />

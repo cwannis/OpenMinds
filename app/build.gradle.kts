@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.openminds"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
     buildFeatures {
         buildConfig = true
     }
@@ -51,10 +49,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.cardview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("io.ktor:ktor-client-android:2.3.0")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
     implementation("io.ktor:ktor-serialization-gson:2.3.0")
+    implementation("io.coil-kt:coil:2.6.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.github.bumptech.glide:glide:4.7.1")
 }

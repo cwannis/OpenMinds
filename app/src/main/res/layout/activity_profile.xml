@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".profileActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:background="@color/purple"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:baselineAligned="false" android:padding="8sp"
+            android:layout_marginTop="10sp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunito"
+                android:textSize="@dimen/default_text_size"
+                android:text="@string/settings"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/profile"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/textViewFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/white"
+                android:gravity="end"
+                android:text="@string/logout"
+                android:textSize="@dimen/default_text_size" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_width="210sp"
+        android:background="@drawable/pp_border"
+        android:translationY="-100sp"
+        android:layout_height="210sp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/myCardView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            >
+
+            <ImageView
+                android:id="@+id/roundedimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:translationY="-70dp">
+    <TextView
+        android:id="@+id/ProfileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:gravity="center"
+        android:textSize="@dimen/title_size"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/ProfileOrganization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Organization"
+        android:gravity="center"
+        android:textSize="@dimen/default_text_size"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20sp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/badge_shape"
+            android:gravity="center"
+            android:padding="8sp"
+            android:textColor="@color/purple"
+            android:paddingStart="30sp"
+            android:paddingEnd="30sp"
+            android:textStyle="bold"
+            android:text="Badges"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/monRecyclerView"
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
