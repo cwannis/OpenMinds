@@ -38,4 +38,11 @@ function userExistsPassword($identifier, $bdd, $password)
     $userexist->execute(array($identifier, $identifier, $password));
     return $userexist->rowCount() > 0;
 }
+
+function getBadgesForUser($id, $bdd)
+{
+    $req = $bdd->prepare("SELECT b.* FROM abadge AS a INNER JOIN badge AS b ON a.idBadge = b.id WHERE a.idUser = ?");
+    $req->execute(array($id));
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
