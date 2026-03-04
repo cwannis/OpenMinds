@@ -34,7 +34,7 @@ class profileActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.allbadge)
         val mesBadge = listOf(
-            Badge("", "badge de test", "je test l'implementation des badge", System.currentTimeMillis()),
+            Badge("https://png.pngtree.com/thumb_back/fh260/background/20240522/pngtree-abstract-cloudy-background-beautiful-natural-streaks-of-sky-and-clouds-red-image_15684333.jpg", "badge de test", "je test l'implementation des badge", System.currentTimeMillis()),
             Badge("", "deuxieme test", "un autre badge pour voir", System.currentTimeMillis() - (2 * 60 * 1000))
         )
         recyclerView.layoutManager = LinearLayoutManager(this)
