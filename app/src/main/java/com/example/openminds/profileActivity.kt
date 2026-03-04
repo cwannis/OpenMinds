@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
@@ -29,6 +31,18 @@ class profileActivity : AppCompatActivity() {
         }
         updatePP()
         updateText()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.allbadge)
+        lifecycleScope.launch {
+            val sharedPref = getSharedPreferences("OpenMindsPrefs", MODE_PRIVATE)
+            val id = sharedPref.getInt("USER_ID", 0)
+            val mesBadge = getBadgesOfUser(this@profileActivity, id)
+            recyclerView.layoutManager = LinearLayoutManager(this@profileActivity)
+            recyclerView.adapter = BadgeAdapter(mesBadge)
+        }
+
+
+
     }
 
     fun updatePP()

@@ -73,7 +73,28 @@
         android:id="@+id/monRecyclerView"
         android:layout_marginTop="20sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:layout_gravity="end"
+        app:menu="@menu/menu_navigation"
+        app:itemIconTint="@color/purple"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="32dp"
+        app:itemRippleColor="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    </LinearLayout>
 
 </LinearLayout>
