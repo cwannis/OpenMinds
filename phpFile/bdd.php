@@ -41,7 +41,7 @@ function userExistsPassword($identifier, $bdd, $password)
 
 function getBadgesForUser($id, $bdd)
 {
-    $req = $bdd->prepare("SELECT SELECT b.id, b.titre, b.description, UNIX_TIMESTAMP(b.datePubli) * 1000 as datePubli, b.imageUrl FROM abadge AS a INNER JOIN badge AS b ON a.idBadge = b.id WHERE a.idUser = ?");
+    $req = $bdd->prepare("SELECT b.id, b.titre, b.description, UNIX_TIMESTAMP(b.datePubli) * 1000 as datePubli, b.imageUrl FROM abadge AS a INNER JOIN badge AS b ON a.idBadge = b.id WHERE a.idUser = ?");
     $req->execute(array($id));
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
