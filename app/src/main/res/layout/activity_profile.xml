@@ -131,7 +131,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/monRecyclerView"
+        android:id="@+id/allbadge"
         android:layout_marginTop="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
