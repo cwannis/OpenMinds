@@ -119,6 +119,21 @@ suspend fun getUserData(context: Context, id : Int) : User{
     return User(-1, "", "", "", "")
 }
 
+suspend fun getBadgesOfUser(context: Context, id : Int) : List<Badge> {
+    val response: HttpResponse = client.post(baseUrl + "getBadgesOfUser.php") {
+        url {
+            parameters.append("id", id.toString())
+        }
+        header("X-Api-Key", BuildConfig.API_KEY)
+    }
+
+    val contenu = response.bodyAsText()
+    Log.d("API_RES", "Réponse du serveur : $contenu")
+
+    val badges = response.body<List<Badge>>();
+    return badges
+}
+
 suspend fun signUp(context: Context, nameValue : String, emailValue : String, pswValue : String, orga : String)
 {
     val response: HttpResponse =

@@ -33,12 +33,15 @@ class profileActivity : AppCompatActivity() {
         updateText()
 
         val recyclerView = findViewById<RecyclerView>(R.id.allbadge)
-        val mesBadge = listOf(
-            Badge("https://png.pngtree.com/thumb_back/fh260/background/20240522/pngtree-abstract-cloudy-background-beautiful-natural-streaks-of-sky-and-clouds-red-image_15684333.jpg", "badge de test", "je test l'implementation des badge", System.currentTimeMillis()),
-            Badge("", "deuxieme test", "un autre badge pour voir", System.currentTimeMillis() - (2 * 60 * 1000))
-        )
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = BadgeAdapter(mesBadge)
+        lifecycleScope.launch {
+            val sharedPref = getSharedPreferences("OpenMindsPrefs", MODE_PRIVATE)
+            val id = sharedPref.getInt("USER_ID", 0)
+            val mesBadge = getBadgesOfUser(this@profileActivity, id)
+            recyclerView.layoutManager = LinearLayoutManager(this@profileActivity)
+            recyclerView.adapter = BadgeAdapter(mesBadge)
+        }
+
+
 
     }
 
