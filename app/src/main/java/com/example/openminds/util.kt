@@ -55,24 +55,7 @@ fun login(context: Context, user: User)
 
 suspend fun getAllForm(context: Context) : List<Formation>
 {
-    val response: HttpResponse = client.post(baseUrl + "getAllFormation.php") {
-        url {
-        }
-        header("X-Api-Key", BuildConfig.API_KEY)
-    }
-
-    val contenu = response.bodyAsText()
-    Log.d("API_RES", "Réponse du serveur : $contenu")
-
-    if(response.status.value == 200)
-    {
-        val formations = response.body<List<Formation>>();
-        return formations
-    }
-    else
-    {
-        return ArrayList<Formation>()
-    }
+    return dataWebRequete.makeRequest<Formation>("getAllFormation.php")
 }
 
 suspend fun login(context: Context, mail : String, psw : String)
@@ -120,18 +103,8 @@ suspend fun getUserData(context: Context, id : Int) : User{
 }
 
 suspend fun getBadgesOfUser(context: Context, id : Int) : List<Badge> {
-    val response: HttpResponse = client.post(baseUrl + "getBadgesOfUser.php") {
-        url {
-            parameters.append("id", id.toString())
-        }
-        header("X-Api-Key", BuildConfig.API_KEY)
-    }
-
-    val contenu = response.bodyAsText()
-    Log.d("API_RES", "Réponse du serveur : $contenu")
-
-    val badges = response.body<List<Badge>>();
-    return badges
+    val params = mapOf("id" to id.toString())
+    return dataWebRequete.makeRequest<Badge>("getBadgesOfUser.php", params)
 }
 
 suspend fun signUp(context: Context, nameValue : String, emailValue : String, pswValue : String, orga : String)
