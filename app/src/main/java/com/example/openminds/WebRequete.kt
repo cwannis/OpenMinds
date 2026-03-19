@@ -31,7 +31,6 @@ object dataWebRequete {
     }
 }
 object ApiClient {
-    // Un seul client pour toute l'application
     val httpClient = HttpClient(Android) {
         install(ContentNegotiation) {
             gson()
