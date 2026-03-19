@@ -131,30 +131,14 @@ fun isEmailValid(email: String): Boolean {
 
 suspend fun sendCodeMail(code : String, mail : String)
 {
-    val response1: HttpResponse =
-        client.post(baseUrl + "mailRecup.php") {
-            url {
-                parameters.append("code", code)
-                parameters.append("mailTo", mail)
-            }
-            header("X-Api-Key", BuildConfig.API_KEY)
-        }
-    val contenu = response1.bodyAsText()
-    Log.d("API_RES", "Réponse du serveur : $contenu")
+    val sendCodeStatus = dataWebRequete.makeRequestWithoutReturn("mailRecup.php", mapOf("code" to code, "mailTo" to mail))
+    Log.d("API_RES", "Réponse du serveur : $sendCodeStatus")
 }
 
 suspend fun changePassword(context: Context, mail: String, psw: String)
 {
-    val response1: HttpResponse =
-        client.post(baseUrl + "changePassword.php") {
-            url {
-                parameters.append("email", mail)
-                parameters.append("newpsw", psw)
-            }
-            header("X-Api-Key", BuildConfig.API_KEY)
-        }
-    val contenu = response1.bodyAsText()
-    Log.d("API_RES", "Réponse du serveur : $contenu")
+    val changePasswordStatue = dataWebRequete.makeRequestWithoutReturn("changePassword.php", mapOf("email" to mail, "newpsw" to psw))
+    Log.d("API_RES", "Réponse du serveur : $changePasswordStatue")
     val intent = Intent(context, LogInActivity::class.java)
     context.startActivity(intent)
 }
