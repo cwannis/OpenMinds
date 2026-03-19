@@ -29,6 +29,19 @@ object dataWebRequete {
         return responceGson
 
     }
+
+    suspend fun makeRequestWithoutReturn(endUrl: String,
+                                               parameterss: Map<String, String> = emptyMap()) : Int{
+        val response: HttpResponse = ApiClient.httpClient.post(baseUrl + endUrl) {
+            url {
+                for (parameter in parameterss) {
+                    parameters.append(parameter.key, parameter.value)
+                }
+                header("X-Api-Key", BuildConfig.API_KEY)
+            }
+        }
+        return response.status.value
+    }
 }
 object ApiClient {
     val httpClient = HttpClient(Android) {

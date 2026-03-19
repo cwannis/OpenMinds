@@ -109,33 +109,16 @@ suspend fun getBadgesOfUser(context: Context, id : Int) : List<Badge> {
 
 suspend fun signUp(context: Context, nameValue : String, emailValue : String, pswValue : String, orga : String)
 {
-    val response: HttpResponse =
-        client.post(baseUrl + "mailExist.php") {
-            url {
-                parameters.append("email", emailValue)
-            }
-            header("X-Api-Key", BuildConfig.API_KEY)
-        }
-    if(response.status.value == 401)
+    val statusEmail = dataWebRequete.makeRequestWithoutReturn("mailExist.php", mapOf("email" to emailValue))
+
+    if(statusEmail == 401)
     {
         Toast.makeText(context, "ce mail est deja utilise par un autre utilisateur", Toast.LENGTH_SHORT).show()
         return
     }
-    val response1: HttpResponse =
-        client.post(baseUrl + "createUser.php") {
-            url {
-                parameters.append("name", nameValue)
-                parameters.append("mail", emailValue)
-                parameters.append("password", pswValue)
-                parameters.append("organization", orga)
-            }
-            header("X-Api-Key", BuildConfig.API_KEY)
-        }
-    if(response1.status.value == 401)
-    {
-        Toast.makeText(context, "ce mail est deja utilise par un autre utilisateur", Toast.LENGTH_SHORT).show()
-        return
-    } else
+    val statusCreateUser = dataWebRequete.makeRequestWithoutReturn("createUser.php", mapOf("name" to nameValue, "mail" to emailValue, "password" to pswValue, "organization" to orga))
+
+    if(statusCreateUser != 401)
     {
         login(context, emailValue, pswValue)
         return
