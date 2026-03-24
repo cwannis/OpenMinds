@@ -15,9 +15,6 @@
         android:theme="@style/Theme.OpenMinds"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".profileActivity"
-            android:exported="false" />
-        <activity
             android:name=".ResetPassword"
             android:exported="false" />
         <activity
