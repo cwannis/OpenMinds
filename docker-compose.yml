@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: docker/php-apache/Dockerfile
     container_name: openminds-web
+    restart: unless-stopped
+    init: true
     ports:
       - "8080:80"
     environment:
@@ -14,6 +16,7 @@ services:
       OPENMINDS_API_KEY: testAPIKEY
     volumes:
       - ./:/var/www/html/openMinds
+    working_dir: /var/www/html/openMinds
     depends_on:
       db:
         condition: service_healthy
@@ -21,6 +24,8 @@ services:
   db:
     image: mariadb:11.4
     container_name: openminds-db
+    restart: unless-stopped
+    init: true
     ports:
       - "3307:3306"
     environment:
