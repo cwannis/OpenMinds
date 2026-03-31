@@ -60,6 +60,7 @@ fun login(context: Context, user: User) {
     }
     val intent = when (user.role) {
         "formateur" -> Intent(context, FormateurDashboardActivity::class.java)
+        "admin" -> Intent(context, AdminDashboardActivity::class.java)
         else -> Intent(context, MainActivity::class.java)
     }
     context.startActivity(intent)
