@@ -58,7 +58,10 @@ fun login(context: Context, user: User) {
         putBoolean("IS_LOGGED", true)
         if (!user.ppLink.isNullOrEmpty()) putString("USER_PP", user.ppLink)
     }
-    val intent = Intent(context, MainActivity::class.java)
+    val intent = when (user.role) {
+        "formateur" -> Intent(context, FormateurDashboardActivity::class.java)
+        else -> Intent(context, MainActivity::class.java)
+    }
     context.startActivity(intent)
 }
 

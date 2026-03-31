@@ -1,6 +1,5 @@
 package com.example.openminds
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,22 +19,33 @@ class HomeFragment : Fragment() {
 
         val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
         val userName = sharedPref.getString("USER_NAME", "") ?: ""
+        val role = sharedPref.getString("USER_ROLE", "benevole") ?: "benevole"
         view.findViewById<TextView>(R.id.welcomeText).text = "Bienvenue, $userName"
 
-        view.findViewById<Button>(R.id.btnBrowseFormations).setOnClickListener {
-            startActivity(Intent(requireContext(), FormationListActivity::class.java))
+        if (role == "formateur") {
+            view.findViewById<Button>(R.id.btnBrowseFormations).text = "Mes Sessions"
+            view.findViewById<Button>(R.id.btnBrowseFormations).setOnClickListener {
+                startActivity(android.content.Intent(requireContext(), FormateurDashboardActivity::class.java))
+            }
+        } else {
+            view.findViewById<Button>(R.id.btnBrowseFormations).setOnClickListener {
+                (activity as? MainActivity)?.let {
+                    it.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
+                        .selectedItemId = R.id.nav_formations
+                }
+            }
         }
 
         view.findViewById<Button>(R.id.btnMyInscriptions).setOnClickListener {
-            startActivity(Intent(requireContext(), MyInscriptionsActivity::class.java))
+            startActivity(android.content.Intent(requireContext(), MyInscriptionsActivity::class.java))
         }
 
         view.findViewById<Button>(R.id.btnProgression).setOnClickListener {
-            startActivity(Intent(requireContext(), ProgressionActivity::class.java))
+            startActivity(android.content.Intent(requireContext(), ProgressionActivity::class.java))
         }
 
         view.findViewById<Button>(R.id.btnMyBadges).setOnClickListener {
-            startActivity(Intent(requireContext(), MyBadgesActivity::class.java))
+            startActivity(android.content.Intent(requireContext(), MyBadgesActivity::class.java))
         }
     }
 }

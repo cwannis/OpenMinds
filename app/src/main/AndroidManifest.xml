@@ -24,6 +24,8 @@
         <activity android:name=".ResetPassword" android:exported="false"/>
         <activity android:name=".MainActivity" android:exported="false"/>
         <activity android:name=".FormationListActivity" android:exported="false"/>
+        <activity android:name=".FormateurDashboardActivity" android:exported="false"/>
+        <activity android:name=".SessionParticipantsActivity" android:exported="false"/>
         <activity android:name=".FormationDetailActivity" android:exported="false"/>
         <activity android:name=".SessionListActivity" android:exported="false"/>
         <activity android:name=".QuizActivity" android:exported="false"/>
