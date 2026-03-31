@@ -6,37 +6,35 @@ require_once 'bdd.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$code = htmlspecialchars($_GET['code']);
-$mailTo = htmlspecialchars($_GET['mailTo']);
+$code = isset($_GET['code']) ? htmlspecialchars($_GET['code']) : "";
+$mailTo = isset($_GET['mailTo']) ? htmlspecialchars($_GET['mailTo']) : "";
 
-if(mailExists($mailTo, $bdd)) {
+if (mailExists($mailTo, $bdd)) {
     try {
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = getenv('SMTP_HOST') ?: 'sandbox.smtp.mailtrap.io';
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = 'daa7e5c9983ec2';
-        $mail->Password = '94013ef61aa8d0';
+        $mail->Port = getenv('SMTP_PORT') ?: 2525;
+        $mail->Username = getenv('SMTP_USER') ?: 'daa7e5c9983ec2';
+        $mail->Password = getenv('SMTP_PASS') ?: '94013ef61aa8d0';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-        // Destinataires
-        $mail->setFrom('from@example.com', 'OpenMinds Admin');
-        $mail->addAddress($mailTo, 'WANNIS');
+        $mail->setFrom('from@example.com', 'OpenMinds');
+        $mail->addAddress($mailTo);
 
-        // Contenu
         $mail->isHTML(true);
-        $mail->Subject = 'Bienvenue sur OpenMinds';
-        $mail->Body = '
-    <h1>Mot de passe oublie</h1>
-    
-    <h2>votre code de recuperation est : ' . $code . ' </h2>
-    ';
+        $mail->Subject = 'Mot de passe oublie - OpenMinds';
+        $mail->Body = '<h1>Mot de passe oublie</h1><h2>Votre code de recuperation est : ' . $code . '</h2>';
 
         $mail->send();
-        echo 'Message envoyé !';
+        echo json_encode(["message" => "Code envoye"]);
     } catch (Exception $e) {
-        echo "Erreur lors de l'envoi : {$mail->ErrorInfo}";
+        http_response_code(500);
+        echo json_encode(["erreur" => "Erreur envoi: {$mail->ErrorInfo}"]);
     }
+} else {
+    http_response_code(404);
+    echo json_encode(["erreur" => "Email introuvable"]);
 }
 ?>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,30 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenMinds"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ResetPassword"
-            android:exported="false" />
-        <activity
-            android:name=".ResetPswCode"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SpashActivity"
-            android:exported="true">
+        <activity android:name=".SpashActivity" android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LogInActivity"
-            android:exported="true" />
+        <activity android:name=".LogInActivity" android:exported="true"/>
+        <activity android:name=".RegisterActivity" android:exported="true"/>
+        <activity android:name=".ResetPswCode" android:exported="false"/>
+        <activity android:name=".ResetPassword" android:exported="false"/>
+        <activity android:name=".MainActivity" android:exported="false"/>
+        <activity android:name=".FormationListActivity" android:exported="false"/>
+        <activity android:name=".FormationDetailActivity" android:exported="false"/>
+        <activity android:name=".SessionListActivity" android:exported="false"/>
+        <activity android:name=".QuizActivity" android:exported="false"/>
+        <activity android:name=".MyInscriptionsActivity" android:exported="false"/>
+        <activity android:name=".ProgressionActivity" android:exported="false"/>
+        <activity android:name=".MyBadgesActivity" android:exported="false"/>
+        <activity android:name=".ProfileActivity" android:exported="false"/>
     </application>
-
 </manifest>

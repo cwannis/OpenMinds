@@ -13,8 +13,10 @@ import io.ktor.serialization.gson.gson
 
 object dataWebRequete {
 
-    suspend inline fun <reified T> makeRequest(endUrl: String,
-                                               parameterss: Map<String, String> = emptyMap()) : List<T> {
+    suspend inline fun <reified T> makeRequest(
+        endUrl: String,
+        parameterss: Map<String, String> = emptyMap()
+    ): List<T> {
         val response: HttpResponse = ApiClient.httpClient.post(baseUrl + endUrl) {
             url {
                 for (parameter in parameterss) {
@@ -25,13 +27,13 @@ object dataWebRequete {
         }
         val contenu = response.bodyAsText()
         Log.d("API_RES", "Réponse du serveur : $contenu")
-        val responceGson = response.body<List<T>>()
-        return responceGson
-
+        return response.body<List<T>>()
     }
 
-    suspend fun makeRequestWithoutReturn(endUrl: String,
-                                               parameterss: Map<String, String> = emptyMap()) : Int{
+    suspend fun makeRequestWithoutReturn(
+        endUrl: String,
+        parameterss: Map<String, String> = emptyMap()
+    ): Int {
         val response: HttpResponse = ApiClient.httpClient.post(baseUrl + endUrl) {
             url {
                 for (parameter in parameterss) {
@@ -40,9 +42,11 @@ object dataWebRequete {
                 header("X-Api-Key", BuildConfig.API_KEY)
             }
         }
+        Log.d("API_RES", "Status: ${response.status.value} - ${response.bodyAsText()}")
         return response.status.value
     }
 }
+
 object ApiClient {
     val httpClient = HttpClient(Android) {
         install(ContentNegotiation) {

@@ -3,7 +3,6 @@ package com.example.openminds
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
-import android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -11,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.PointerIconCompat.TYPE_TEXT
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -27,12 +25,12 @@ class LogInActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        if(isLogged(this))
-        {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        if (isLogged(this)) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
+
     fun login(view: View) {
         lifecycleScope.launch {
             try {
@@ -40,52 +38,43 @@ class LogInActivity : AppCompatActivity() {
                 val pswInput = findViewById<EditText>(R.id.mdpText)
                 val emailValue = emailInput.text.toString()
                 val passwordValue = pswInput.text.toString()
-
                 if (emailValue.isEmpty() || passwordValue.isEmpty()) {
                     Toast.makeText(this@LogInActivity, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
                     return@launch
                 }
-
                 login(this@LogInActivity, emailValue, passwordValue)
-
             } catch (e: Exception) {
                 Log.e("API_ERR", "Erreur : ${e.message}")
-                Toast.makeText(this@LogInActivity, "Une erreur est survenu avec le serve", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LogInActivity, "Erreur serveur", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     fun goToRegister(view: View) {
-        val i = Intent(this, RegisterActivity::class.java)
-        startActivity(i)
+        startActivity(Intent(this, RegisterActivity::class.java))
         finish()
     }
 
-    fun showButton(view: View) {
+    fun showPassword(view: View) {
         val input = findViewById<EditText>(R.id.mdpText)
         val text = findViewById<TextView>(R.id.showPasswordButton)
-        Log.i("PASSWORD HIDE", input.inputType.toString())
-        if(input.inputType == InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD)
-        {
-            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT
+        if (input.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             text.text = "hide"
-        }
-        else
-        {
-            input.inputType = InputType.TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_PASSWORD
+        } else {
+            input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             text.text = "show"
         }
     }
 
     fun goToResetPswCode(view: View) {
         val emailInput = findViewById<EditText>(R.id.editTextTextEmailAddress2).text.toString()
-        if(emailInput.isNotEmpty() && isEmailValid(emailInput)) {
+        if (emailInput.isNotEmpty() && isEmailValid(emailInput)) {
             val intent = Intent(this, ResetPswCode::class.java)
             intent.putExtra("mail", emailInput)
             startActivity(intent)
-            finish()
+        } else {
+            Toast.makeText(this, "Entrez un email valide", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }

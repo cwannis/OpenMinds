@@ -10,18 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
+import coil.load
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,43 +26,35 @@ class ProfileFragment : Fragment() {
             logout(requireContext())
         }
 
-        updatePP(view)
-        updateText(view)
+        view.findViewById<TextView>(R.id.btnMyBadges).setOnClickListener {
+            startActivity(android.content.Intent(requireContext(), MyBadgesActivity::class.java))
+        }
+
+        val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
+        val name = sharedPref.getString("USER_NAME", "") ?: ""
+        val email = sharedPref.getString("USER_EMAIL", "") ?: ""
+        val role = sharedPref.getString("USER_ROLE", "benevole") ?: "benevole"
+
+        view.findViewById<TextView>(R.id.ProfileName).text = name
+        view.findViewById<TextView>(R.id.ProfileEmail).text = email
+        view.findViewById<TextView>(R.id.ProfileRole).text = when (role) {
+            "admin" -> "Administrateur"
+            "formateur" -> "Formateur"
+            else -> "Benevole"
+        }
+
+        val ppUrl = sharedPref.getString("USER_PP", "")
+        val imgUrl = if (ppUrl.isNullOrEmpty()) {
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMC7WWfO9a2eZPsSkxU4OjNTSgBqaXWjew&s"
+        } else ppUrl
+        view.findViewById<ImageView>(R.id.roundedimage).load(imgUrl)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.allbadge)
         viewLifecycleOwner.lifecycleScope.launch {
-            val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
-            val id = sharedPref.getInt("USER_ID", 0)
-            val mesBadge = getBadgesOfUser(requireContext(), id)
+            val userId = sharedPref.getInt("USER_ID", 0)
+            val badges = getMyBadges(requireContext(), userId)
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = BadgeAdapter(mesBadge)
-        }
-    }
-
-    private fun updatePP(view: View) {
-        val roundedimag = view.findViewById<ImageView>(R.id.roundedimage)
-        var ppLink = arguments?.getString("pp")
-
-        if (ppLink.isNullOrEmpty()) {
-            ppLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMC7WWfO9a2eZvPsSkxU4OjNTSgBqaXWjew&s"
-        }
-        Picasso.get()
-            .load(ppLink)
-            .into(roundedimag)
-
-        Glide.with(requireContext())
-            .load(ppLink)
-            .into(roundedimag)
-    }
-
-    private fun updateText(view: View) {
-        val profileName = view.findViewById<TextView>(R.id.ProfileName)
-        val profileOrganization = view.findViewById<TextView>(R.id.ProfileOrganization)
-        val name = arguments?.getString("nom")
-        val orga = arguments?.getString("orga")
-        if (!name.isNullOrEmpty() && !orga.isNullOrEmpty()) {
-            profileName.text = name
-            profileOrganization.text = orga
+            recyclerView.adapter = BadgeAdapter(badges)
         }
     }
 }
