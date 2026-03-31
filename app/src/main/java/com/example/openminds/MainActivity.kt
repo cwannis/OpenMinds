@@ -1,6 +1,5 @@
 package com.example.openminds
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!isLogged(this)) {
-            startActivity(Intent(this, LogInActivity::class.java))
+            startActivity(android.content.Intent(this, LogInActivity::class.java))
             finish()
             return
         }
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> { loadFragment(HomeFragment()); true }
-                R.id.nav_formations -> { startActivity(Intent(this, FormationListActivity::class.java)); true }
+                R.id.nav_formations -> { loadFragment(FormationListFragment()); true }
                 R.id.nav_profile -> { loadFragment(ProfileFragment()); true }
                 else -> false
             }
