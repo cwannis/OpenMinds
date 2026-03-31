@@ -38,6 +38,10 @@ class AdminDashboardActivity : AppCompatActivity() {
         loadDashboard()
     }
 
+    private fun toInt(value: Any?): Long {
+        return (value as? Number)?.toLong() ?: 0L
+    }
+
     private fun loadDashboard() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
@@ -49,14 +53,14 @@ class AdminDashboardActivity : AppCompatActivity() {
 
                 val stats = result["stats"] as? Map<String, Any>
                 if (stats != null) {
-                    findViewById<TextView>(R.id.tvBenevoles).text = "Benevoles: ${stats["nb_benevoles"]}"
-                    findViewById<TextView>(R.id.tvFormateurs).text = "Formateurs: ${stats["nb_formateurs"]}"
-                    findViewById<TextView>(R.id.tvFormations).text = "Formations: ${stats["nb_formations"]}"
-                    findViewById<TextView>(R.id.tvSessions).text = "Sessions: ${stats["nb_sessions"]}"
-                    findViewById<TextView>(R.id.tvInscriptions).text = "Inscriptions: ${stats["nb_inscriptions"]}"
-                    findViewById<TextView>(R.id.tvQuizPasses).text = "Quiz passes: ${stats["nb_quiz_passes"]}"
-                    findViewById<TextView>(R.id.tvQuizReussis).text = "Quiz reussis: ${stats["nb_quiz_reussis"]}"
-                    findViewById<TextView>(R.id.tvTauxReussite).text = "Taux reussite: ${stats["taux_reussite"]}%"
+                    findViewById<TextView>(R.id.tvBenevoles).text = "Benevoles: " + toInt(stats["nb_benevoles"])
+                    findViewById<TextView>(R.id.tvFormateurs).text = "Formateurs: " + toInt(stats["nb_formateurs"])
+                    findViewById<TextView>(R.id.tvFormations).text = "Formations: " + toInt(stats["nb_formations"])
+                    findViewById<TextView>(R.id.tvSessions).text = "Sessions: " + toInt(stats["nb_sessions"])
+                    findViewById<TextView>(R.id.tvInscriptions).text = "Inscriptions: " + toInt(stats["nb_inscriptions"])
+                    findViewById<TextView>(R.id.tvQuizPasses).text = "Quiz passes: " + toInt(stats["nb_quiz_passes"])
+                    findViewById<TextView>(R.id.tvQuizReussis).text = "Quiz reussis: " + toInt(stats["nb_quiz_reussis"])
+                    findViewById<TextView>(R.id.tvTauxReussite).text = "Taux reussite: " + toInt(stats["taux_reussite"]) + "%"
                 }
 
                 val recent = result["recent_inscriptions"] as? List<Map<String, Any>>
@@ -72,7 +76,7 @@ class AdminDashboardActivity : AppCompatActivity() {
                     recyclerView.adapter = adapter
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@AdminDashboardActivity, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AdminDashboardActivity, "Erreur: " + e.message, Toast.LENGTH_SHORT).show()
             } finally {
                 progressBar.visibility = View.GONE
             }
