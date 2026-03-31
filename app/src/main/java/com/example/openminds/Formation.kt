@@ -11,7 +11,7 @@ data class Formation(
     val videoUrl: String? = "",
     val duration_minutes: Int = 0,
     val created_by: Int? = null,
-    val datePubli: Long = 0,
+    val datePubli: String = "",
     val active: Int = 1,
     val sessions_inscrites: Int = 0,
     val quiz_passed: Int = 0,

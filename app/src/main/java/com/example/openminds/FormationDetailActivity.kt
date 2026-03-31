@@ -14,10 +14,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.launch
 
 class FormationDetailActivity : AppCompatActivity() {
     private var formationId = 0
+    private var formationTitle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,10 @@ class FormationDetailActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        findViewById<MaterialToolbar>(R.id.toolbar).setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
 
         formationId = intent.getIntExtra("FORMATION_ID", 0)
@@ -45,6 +51,7 @@ class FormationDetailActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnTakeQuiz).setOnClickListener {
             startActivity(Intent(this, QuizActivity::class.java).apply {
                 putExtra("FORMATION_ID", formationId)
+                putExtra("FORMATION_TITLE", formationTitle)
             })
         }
 
@@ -58,6 +65,7 @@ class FormationDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val f = getFormation(this@FormationDetailActivity, formationId)
+                formationTitle = f.titre
                 findViewById<TextView>(R.id.tvFormationTitle).text = f.titre
                 findViewById<TextView>(R.id.tvThematique).text = f.thematique
                 findViewById<TextView>(R.id.tvDescription).text = f.description

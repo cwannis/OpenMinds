@@ -3,7 +3,6 @@ package com.example.openminds
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -37,10 +36,9 @@ class RegisterActivity : AppCompatActivity() {
         val nameValue = findViewById<EditText>(R.id.editName).text.toString()
         val emailValue = findViewById<EditText>(R.id.editTextTextEmailAddress2).text.toString()
         val pswValue = findViewById<EditText>(R.id.pswEdit).text.toString()
-        val orga = findViewById<EditText>(R.id.Organisation).text.toString()
         val readTerms = findViewById<CheckBox>(R.id.checkBox).isChecked
 
-        if (nameValue.isEmpty() || emailValue.isEmpty() || pswValue.isEmpty() || orga.isEmpty()) {
+        if (nameValue.isEmpty() || emailValue.isEmpty() || pswValue.isEmpty()) {
             Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
             return
         }
@@ -57,9 +55,8 @@ class RegisterActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                signUp(this@RegisterActivity, nameValue, emailValue, pswValue, orga)
+                signUp(this@RegisterActivity, nameValue, emailValue, pswValue)
             } catch (e: Exception) {
-                Log.e("API_ERR", "Erreur : ${e.message}")
                 Toast.makeText(this@RegisterActivity, "Erreur lors de l'inscription", Toast.LENGTH_SHORT).show()
             }
         }

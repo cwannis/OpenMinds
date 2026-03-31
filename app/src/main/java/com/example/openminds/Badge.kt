@@ -4,6 +4,7 @@ data class Badge(
     val id: Int,
     val titre: String,
     val description: String,
-    val datePubli: Long = 0,
-    val imageUrl: String = ""
+    val imageUrl: String = "",
+    val thematique: String = "",
+    val dateObtention: String = ""
 )

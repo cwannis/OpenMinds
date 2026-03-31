@@ -86,17 +86,17 @@ suspend fun login(context: Context, mail: String, psw: String) {
 
 suspend fun getUserData(context: Context, id: Int): User {
     val res = dataWebRequete.makeRequest<User>("getUserData.php", mapOf("id" to id.toString()))
-    return if (res.isNotEmpty()) res[0] else User(-1, "", "", "", "", "benevole")
+    return if (res.isNotEmpty()) res[0] else User(-1, "", "", "benevole")
 }
 
-suspend fun signUp(context: Context, name: String, email: String, psw: String, orga: String) {
+suspend fun signUp(context: Context, name: String, email: String, psw: String) {
     val status = dataWebRequete.makeRequestWithoutReturn("mailExist.php", mapOf("email" to email))
     if (status == 401) {
         Toast.makeText(context, "Cet email est deja utilise", Toast.LENGTH_SHORT).show()
         return
     }
     val status2 = dataWebRequete.makeRequestWithoutReturn("createUser.php", mapOf(
-        "name" to name, "mail" to email, "password" to psw, "organization" to orga
+        "name" to name, "mail" to email, "password" to psw
     ))
     if (status2 != 401) login(context, email, psw)
 }
@@ -118,8 +118,13 @@ suspend fun getAllFormations(context: Context, thematique: String = "", search: 
 }
 
 suspend fun getFormation(context: Context, formationId: Int): Formation {
-    val res = dataWebRequete.makeRequest<Formation>("getFormation.php", mapOf("formation_id" to formationId.toString()))
-    return if (res.isNotEmpty()) res[0] else Formation(-1, "", "", "")
+    val response = ApiClient.httpClient.post(baseUrl + "getFormation.php") {
+        url {
+            parameters.append("formation_id", formationId.toString())
+            header("X-Api-Key", BuildConfig.API_KEY)
+        }
+    }
+    return response.body<Formation>()
 }
 
 suspend fun getThematiques(context: Context): List<String> {
@@ -137,6 +142,12 @@ suspend fun getMyInscriptions(context: Context, userId: Int): List<Inscription> 
 
 suspend fun inscrireSession(context: Context, userId: Int, sessionId: Int): Int {
     return dataWebRequete.makeRequestWithoutReturn("inscrireSession.php", mapOf(
+        "user_id" to userId.toString(), "session_id" to sessionId.toString()
+    ))
+}
+
+suspend fun desinscrireSession(context: Context, userId: Int, sessionId: Int): Int {
+    return dataWebRequete.makeRequestWithoutReturn("desinscrireSession.php", mapOf(
         "user_id" to userId.toString(), "session_id" to sessionId.toString()
     ))
 }

@@ -15,7 +15,7 @@ $stmt->execute([$formationId]);
 $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($quizzes as &$quiz) {
-    $qStmt = $bdd->prepare("SELECT id, quiz_id, question, option_a, option_b, option_c, option_d FROM quiz_question WHERE quiz_id = ? ORDER BY id");
+    $qStmt = $bdd->prepare("SELECT id, quiz_id, question, option_a, option_b, option_c, option_d, correct_answer FROM quiz_question WHERE quiz_id = ? ORDER BY id");
     $qStmt->execute([$quiz['id']]);
     $quiz['questions'] = $qStmt->fetchAll(PDO::FETCH_ASSOC);
 }

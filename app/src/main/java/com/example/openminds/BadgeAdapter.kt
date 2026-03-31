@@ -7,9 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class BadgeAdapter(
     private val badges: List<Badge>
@@ -35,9 +32,10 @@ class BadgeAdapter(
             crossfade(true)
             placeholder(R.drawable.ic_cercle_nav)
         }
-        if (badge.datePubli > 0) {
-            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            holder.time.text = sdf.format(Date(badge.datePubli))
+        if (badge.dateObtention.isNotEmpty()) {
+            holder.time.text = badge.dateObtention.substring(0, 10)
+        } else {
+            holder.time.text = ""
         }
         holder.itemView.contentDescription = "${badge.titre}: ${badge.description}"
     }

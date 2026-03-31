@@ -7,12 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     override fun onCreateView(
@@ -41,10 +36,6 @@ class HomeFragment : Fragment() {
 
         view.findViewById<Button>(R.id.btnMyBadges).setOnClickListener {
             startActivity(Intent(requireContext(), MyBadgesActivity::class.java))
-        }
-
-        view.findViewById<TextView>(R.id.btnLogOut).setOnClickListener {
-            logout(requireContext())
         }
     }
 }

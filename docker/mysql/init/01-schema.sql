@@ -149,7 +149,6 @@ CREATE TABLE IF NOT EXISTS association (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Users: admin=admin, test123=test123
 INSERT INTO user (id, name, email, password, role, ppLink) VALUES
 (1, 'Admin OpenMinds', 'admin@openminds.local', '$2y$12$OkdYDLm4EXyNGQLjQ421puKVEsF9hPkIXt9OHy1IXzb1eAvTHJU7.', 'admin', NULL),
 (2, 'Marie Formatrice', 'marie.formatrice@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'formateur', NULL),
@@ -163,12 +162,12 @@ INSERT INTO association (id, name, description, logoUrl, active) VALUES
 (3, 'Restos du Coeur', 'Aide alimentaire.', 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=200&h=200&fit=crop', 1);
 
 INSERT INTO formation (id, titre, description, thematique, type, imageUrl, content, duration_minutes, created_by, active) VALUES
-(1, 'Comprendre l inclusion sociale', 'Formation sur les enjeux de l inclusion sociale et les actions concretes.', 'Inclusion', 'both', 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop', 'L inclusion sociale est un processus qui vise a permettre a chaque individu de participer pleinement a la vie de la societe.', 90, 2, 1),
-(2, 'Egalite et non-discrimination', 'Principes d egalite et moyens de combattre les discriminations.', 'Egalite', 'online', 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=250&fit=crop', 'L egalite est un principe fondamental. La discrimination peut etre directe ou indirecte.', 60, 2, 1),
-(3, 'Ecologie et engagement citoyen', 'Agir concretement pour l environnement a l echelle locale.', 'Environnement', 'both', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop', 'L engagement citoyen pour l environnement passe par des actions concretes.', 120, 5, 1),
-(4, 'Tolerance et diversite culturelle', 'Reconnaitre et valoriser la diversite culturelle.', 'Tolerance', 'online', 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=250&fit=crop', 'La diversite culturelle est une richesse. La tolerance est la reconnaissance active de chaque culture.', 75, 2, 1),
-(5, 'Engagement citoyen et benevolat', 'Comprendre et vivre son engagement citoyen.', 'Engagement', 'in-person', 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop', 'L engagement citoyen est un acte volontaire pour contribuer au bien commun.', 45, 5, 1),
-(6, 'Respect et droits humains', 'Comprendre la Declaration Universelle des Droits de l Homme.', 'Respect', 'online', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=250&fit=crop', 'Les droits humains sont universels, inalienables et indivisibles.', 60, 2, 1);
+(1, 'Comprendre l''inclusion sociale', 'Formation sur les enjeux de l''inclusion sociale et les actions concrètes.', 'Inclusion', 'both', 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop', 'L''inclusion sociale est un processus qui vise à permettre à chaque individu de participer pleinement à la vie de la société. Elle concerne l''accès à l''emploi, au logement, à la santé, à l''éducation et à la culture. Les bénévoles jouent un rôle clé dans ce processus en accompagnant les personnes marginalisées et en favorisant le lien social.', 90, 2, 1),
+(2, 'Egalité et non-discrimination', 'Principes d''égalité et moyens de combattre les discriminations.', 'Egalité', 'online', 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=250&fit=crop', 'L''égalité est un principe fondamental qui garantit que chaque personne est traitée avec les mêmes droits et les mêmes opportunités. La discrimination peut être directe (refus explicite basé sur un critère prohibé) ou indirecte (règle apparemment neutre mais qui désavantage un groupe particulier).', 60, 2, 1),
+(3, 'Ecologie et engagement citoyen', 'Agir concrètement pour l''environnement à l''échelle locale.', 'Environnement', 'both', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop', 'L''engagement citoyen pour l''environnement passe par des actions concrètes : tri des déchets, réduction de la consommation d''énergie, mobilité douce, agriculture urbaine, sensibilisation du voisinage. Chaque geste compte pour préserver notre planète.', 120, 5, 1),
+(4, 'Tolérance et diversité culturelle', 'Reconnaître et valoriser la diversité culturelle.', 'Tolérance', 'online', 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=250&fit=crop', 'La diversité culturelle est une richesse qui doit être protégée et valorisée. La tolérance ne signifie pas l''indifférence mais la reconnaissance active de la valeur de chaque culture. Les préjugés sont des obstacles à surmonter par l''éducation et le dialogue.', 75, 2, 1),
+(5, 'Engagement citoyen et benevolat', 'Comprendre et vivre son engagement citoyen.', 'Engagement', 'in-person', 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop', 'L''engagement citoyen est un acte volontaire par lequel une personne décide de contribuer au bien commun. Le bénévolat est la forme la plus répandue de cet engagement. Il existe de nombreuses formes d''engagement : ponctuel, régulier, en ligne, en présentiel.', 45, 5, 1),
+(6, 'Respect et droits humains', 'Comprendre la Déclaration Universelle des Droits de l''Homme.', 'Respect', 'online', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=250&fit=crop', 'Les droits humains sont universels, inaliénables et indivisibles. Ils protègent la dignité de chaque personne. Cette formation explore les articles fondamentaux de la Déclaration Universelle de 1948 et leur application dans la vie quotidienne.', 60, 2, 1);
 
 INSERT INTO session (id, formation_id, formateur_id, date_debut, date_fin, location, max_participants, is_online, meeting_link, active) VALUES
 (1, 1, 2, '2026-04-15 09:00:00', '2026-04-15 12:00:00', 'Maison des Associations - Paris 10e', 20, 0, NULL, 1),
@@ -194,17 +193,17 @@ INSERT INTO quiz (id, formation_id, titre, passing_score) VALUES
 (5, 6, 'Quiz - Droits humains', 60);
 
 INSERT INTO quiz_question (id, quiz_id, question, option_a, option_b, option_c, option_d, correct_answer) VALUES
-(1, 1, 'Qu est-ce que l inclusion sociale ?', 'L isolement des minorites', 'Le processus permettant a chacun de participer pleinement a la societe', 'Un programme gouvernemental obligatoire', 'Une forme de charity', 'b'),
-(2, 1, 'Quel est un obstacle a l inclusion ?', 'L acces a l education', 'La discrimination a l embauche', 'Le benevolat', 'La diversite culturelle', 'b'),
-(3, 1, 'Comment un benevole peut-il favoriser l inclusion ?', 'En ignorant les differences', 'En accompagnant les personnes marginalisees', 'En refusant l aide aux etrangers', 'En restant dans sa zone de confort', 'b'),
-(4, 2, 'Qu est-ce que la discrimination indirecte ?', 'Un refus explicite', 'Une regle apparemment neutre qui desavantage un groupe', 'Une blague offensive', 'Un compliment mal place', 'b'),
+(1, 1, 'Qu''est-ce que l''inclusion sociale ?', 'L''isolement des minorites', 'Le processus permettant a chacun de participer pleinement a la societe', 'Un programme gouvernemental obligatoire', 'Une forme de charity', 'b'),
+(2, 1, 'Quel est un obstacle a l''inclusion ?', 'L''acces a l''education', 'La discrimination a l''embauche', 'Le benevolat', 'La diversite culturelle', 'b'),
+(3, 1, 'Comment un benevole peut-il favoriser l''inclusion ?', 'En ignorant les differences', 'En accompagnant les personnes marginalisees', 'En refusant l''aide aux etrangers', 'En restant dans sa zone de confort', 'b'),
+(4, 2, 'Qu''est-ce que la discrimination indirecte ?', 'Un refus explicite', 'Une regle apparemment neutre qui desavantage un groupe', 'Une blague offensive', 'Un compliment mal place', 'b'),
 (5, 2, 'Quel texte francais interdit les discriminations ?', 'Le Code de la route', 'Le Code penal et la loi de 1972', 'Le Code des impots', 'Le Code du sport', 'b'),
 (6, 2, 'Combien de criteres de discrimination sont reconnus par la loi ?', '5', '10', '25', 'Plus de 25', 'd'),
-(7, 3, 'Qu est-ce que l agriculture urbaine ?', 'Cultiver en milieu rural', 'Produire des aliments en ville', 'Elever des animaux dans les forets', 'Importer des fruits exotiques', 'b'),
+(7, 3, 'Qu''est-ce que l''agriculture urbaine ?', 'Cultiver en milieu rural', 'Produire des aliments en ville', 'Elever des animaux dans les forets', 'Importer des fruits exotiques', 'b'),
 (8, 3, 'Quel est un geste ecologique au quotidien ?', 'Jeter ses dechets dans la nature', 'Utiliser les transports en commun', 'Laisser la lumiere allumee', 'Acheter du jetable', 'b'),
-(9, 4, 'La tolerance signifie :', 'L indifference', 'La reconnaissance active de la valeur de chaque culture', 'L acceptation de l injustice', 'Le rejet des differences', 'b'),
-(10, 4, 'Qu est-ce qu un prejuges ?', 'Une opinion fondee sur des faits', 'Une idee preconcue non verifiee', 'Une loi universelle', 'Un droit fondamental', 'b'),
-(11, 5, 'Quand a ete adoptee la Declaration Universelle des Droits de l Homme ?', '1789', '1945', '1948', '1989', 'c'),
+(9, 4, 'La tolerance signifie :', 'L''indifference', 'La reconnaissance active de la valeur de chaque culture', 'L''acceptation de l''injustice', 'Le rejet des differences', 'b'),
+(10, 4, 'Qu''est-ce qu''un prejuge ?', 'Une opinion fondee sur des faits', 'Une idee preconcue non verifiee', 'Une loi universelle', 'Un droit fondamental', 'b'),
+(11, 5, 'Quand a ete adoptee la Declaration Universelle des Droits de l''Homme ?', '1789', '1945', '1948', '1989', 'c'),
 (12, 5, 'Les droits humains sont :', 'Reserves aux citoyens', 'Universels et inalienables', 'Negociables', 'Differents selon les pays', 'b');
 
 INSERT INTO quiz_result (id, user_id, quiz_id, score, total_questions, passed, date_passage) VALUES

@@ -5,9 +5,8 @@ header('Content-Type: application/json');
 $name = isset($_GET["name"]) ? trim($_GET["name"]) : "";
 $mail = isset($_GET["mail"]) ? trim($_GET["mail"]) : "";
 $password = isset($_GET["password"]) ? $_GET["password"] : "";
-$orga = isset($_GET["organization"]) ? trim($_GET["organization"]) : "";
 
-if (empty($name) || empty($mail) || empty($password) || empty($orga)) {
+if (empty($name) || empty($mail) || empty($password)) {
     http_response_code(400);
     echo json_encode(["erreur" => "Tous les champs sont obligatoires"]);
     exit;
@@ -26,8 +25,8 @@ if (mailExists($mail, $bdd)) {
 }
 
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-$insertUser = $bdd->prepare("INSERT INTO user (name, email, password, organization) VALUES (?, ?, ?, ?)");
-$insertUser->execute([$name, $mail, $hashedPassword, $orga]);
+$insertUser = $bdd->prepare("INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+$insertUser->execute([$name, $mail, $hashedPassword]);
 
 http_response_code(201);
 echo json_encode(["message" => "Utilisateur cree avec succes"]);
