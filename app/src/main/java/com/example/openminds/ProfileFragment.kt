@@ -26,14 +26,11 @@ class ProfileFragment : Fragment() {
             logout(requireContext())
         }
 
-        view.findViewById<TextView>(R.id.btnMyBadges).setOnClickListener {
-            startActivity(android.content.Intent(requireContext(), MyBadgesActivity::class.java))
-        }
-
         val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
         val name = sharedPref.getString("USER_NAME", "") ?: ""
         val email = sharedPref.getString("USER_EMAIL", "") ?: ""
         val role = sharedPref.getString("USER_ROLE", "benevole") ?: "benevole"
+        val ppUrl = sharedPref.getString("USER_PP", "")
 
         view.findViewById<TextView>(R.id.ProfileName).text = name
         view.findViewById<TextView>(R.id.ProfileEmail).text = email
@@ -43,11 +40,13 @@ class ProfileFragment : Fragment() {
             else -> "Benevole"
         }
 
-        val ppUrl = sharedPref.getString("USER_PP", "")
         val imgUrl = if (ppUrl.isNullOrEmpty()) {
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMC7WWfO9a2eZPsSkxU4OjNTSgBqaXWjew&s"
+            getDefaultAvatar(name)
         } else ppUrl
-        view.findViewById<ImageView>(R.id.roundedimage).load(imgUrl)
+        view.findViewById<ImageView>(R.id.roundedimage).load(imgUrl) {
+            crossfade(true)
+            placeholder(R.drawable.ic_cercle_nav)
+        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.allbadge)
         viewLifecycleOwner.lifecycleScope.launch {
@@ -56,5 +55,16 @@ class ProfileFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = BadgeAdapter(badges)
         }
+    }
+
+    private fun getDefaultAvatar(name: String): String {
+        val avatars = listOf(
+            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop"
+        )
+        return avatars[Math.abs(name.hashCode()) % avatars.size]
     }
 }

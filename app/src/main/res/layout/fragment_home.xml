@@ -5,10 +5,17 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="vertical" android:padding="16dp">
         <TextView android:id="@+id/welcomeText" android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="24dp"
+            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="8dp"
             android:importantForAccessibility="yes"/>
-        <Button android:id="@+id/btnBrowseFormations" android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:minHeight="48dp" android:text="Parcourir les formations" android:textSize="16sp" android:layout_marginBottom="12dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Formations populaires" android:textSize="18sp" android:textStyle="bold"
+            android:layout_marginTop="8dp" android:layout_marginBottom="12dp"/>
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerViewTrending"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Actions rapides" android:textSize="18sp" android:textStyle="bold"
+            android:layout_marginTop="20dp" android:layout_marginBottom="12dp"/>
         <Button android:id="@+id/btnMyInscriptions" android:layout_width="match_parent" android:layout_height="wrap_content"
             android:minHeight="48dp" android:text="Mes inscriptions" android:textSize="16sp" android:layout_marginBottom="12dp"/>
         <Button android:id="@+id/btnProgression" android:layout_width="match_parent" android:layout_height="wrap_content"
