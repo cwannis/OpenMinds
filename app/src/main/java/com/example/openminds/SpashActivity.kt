@@ -2,13 +2,12 @@ package com.example.openminds
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class SpashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +20,14 @@ class SpashActivity : AppCompatActivity() {
             insets
         }
 
-        lifecycleScope.launch {
-            delay(2000)
-            val isLogged = isLogged(this@SpashActivity)
-            val intent : Intent
-            intent = if(isLogged)
-                Intent(this@SpashActivity, MainActivity::class.java)
-            else
-                Intent(this@SpashActivity, LogInActivity::class.java)
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = if (isLogged(this)) {
+                Intent(this, MainActivity::class.java)
+            } else {
+                Intent(this, LogInActivity::class.java)
+            }
             startActivity(intent)
-
             finish()
-        }
+        }, 1500)
     }
 }

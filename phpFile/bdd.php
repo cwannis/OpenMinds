@@ -2,12 +2,10 @@
 require_once("Api.php");
 $headers = getallheaders();
 
-// 3. Vérifier si la clé est présente et valide
 if (!isset($headers['X-Api-Key']) || $headers['X-Api-Key'] !== API_KEY) {
-    // Si la clé est fausse ou absente, on bloque tout !
-    http_response_code(401); // Erreur 401 : Non autorisé
+    http_response_code(401);
     echo json_encode(["erreur" => "Acces refuse : Cle API invalide."]);
-    exit(); // On arrête l'exécution du script ici
+    exit();
 }
 
 $dbHost = getenv("OPENMINDS_DB_HOST") ?: "db";
@@ -27,22 +25,24 @@ $bdd = new PDO(
 
 function mailExists($mail, $bdd)
 {
-    $userexist = $bdd->prepare("SELECT * FROM user WHERE email = ?");
-    $userexist->execute(array($mail));
+    $userexist = $bdd->prepare("SELECT 1 FROM user WHERE email = ?");
+    $userexist->execute([$mail]);
     return $userexist->rowCount() > 0;
 }
 
-function userExistsPassword($identifier, $bdd, $password)
+function verifyPassword($identifier, $bdd, $password)
 {
-    $userexist = $bdd->prepare("SELECT * FROM user WHERE (email = ? OR name = ?) AND password = ?");
-    $userexist->execute(array($identifier, $identifier, $password));
-    return $userexist->rowCount() > 0;
+    $stmt = $bdd->prepare("SELECT id, password FROM user WHERE email = ? OR name = ?");
+    $stmt->execute([$identifier, $identifier]);
+    $row = $stmt->fetch();
+    if (!$row) return false;
+    return password_verify($password, $row['password']);
 }
 
 function getBadgesForUser($id, $bdd)
 {
     $req = $bdd->prepare("SELECT b.id, b.titre, b.description, UNIX_TIMESTAMP(b.datePubli) * 1000 as datePubli, b.imageUrl FROM abadge AS a INNER JOIN badge AS b ON a.idBadge = b.id WHERE a.idUser = ?");
-    $req->execute(array($id));
+    $req->execute([$id]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>

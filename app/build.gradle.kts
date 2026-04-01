@@ -6,9 +6,7 @@ plugins {
 android {
     namespace = "com.example.openminds"
     compileSdk = 36
-    buildFeatures {
-        buildConfig = true
-    }
+    buildFeatures { buildConfig = true }
 
     defaultConfig {
         applicationId = "com.example.openminds"
@@ -16,14 +14,10 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val properties = Properties()
         val localPropertiesFile = project.rootProject.file("local.properties")
-        if (localPropertiesFile.exists()) {
-            properties.load(localPropertiesFile.inputStream())
-        }
-
+        if (localPropertiesFile.exists()) properties.load(localPropertiesFile.inputStream())
         val apiKey = properties.getProperty("API_KEY") ?: ""
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
@@ -31,10 +25,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -57,6 +48,4 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:2.3.0")
     implementation("io.ktor:ktor-serialization-gson:2.3.0")
     implementation("io.coil-kt:coil:2.6.0")
-    implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.bumptech.glide:glide:4.7.1")
 }

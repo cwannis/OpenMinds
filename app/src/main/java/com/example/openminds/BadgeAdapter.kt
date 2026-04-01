@@ -8,34 +8,37 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
-class BadgeAdapter(private val liste: List<Badge>) : RecyclerView.Adapter<BadgeAdapter.ViewHolder>() {
+class BadgeAdapter(
+    private val badges: List<Badge>
+) : RecyclerView.Adapter<BadgeAdapter.BadgeViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
-    {
+    class BadgeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val image: ImageView = view.findViewById(R.id.tvImageBadge)
         val titre: TextView = view.findViewById(R.id.tvTitreBadge)
-        val desc: TextView = view.findViewById(R.id.tvDescriptionBadge)
+        val description: TextView = view.findViewById(R.id.tvDescriptionBadge)
         val time: TextView = view.findViewById(R.id.tvTimeBadge)
-        val imageFormation : ImageView = view.findViewById(R.id.tvImageBadge)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
-    {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BadgeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_badge, parent, false)
-        return ViewHolder(view)
+        return BadgeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: BadgeAdapter.ViewHolder, position: Int) {
-        val formation = liste[position]
-        holder.titre.text = formation.titre
-        holder.desc.text = formation.description
-        holder.time.text = formatTimeAgo(formation.datePubli)
-
-        holder.imageFormation.load(formation.imageUrl) {
+    override fun onBindViewHolder(holder: BadgeViewHolder, position: Int) {
+        val badge = badges[position]
+        holder.titre.text = badge.titre
+        holder.description.text = badge.description
+        holder.image.load(badge.imageUrl) {
             crossfade(true)
-            placeholder(R.color.gray)
+            placeholder(R.drawable.ic_cercle_nav)
         }
+        if (badge.dateObtention.isNotEmpty()) {
+            holder.time.text = badge.dateObtention.substring(0, 10)
+        } else {
+            holder.time.text = ""
+        }
+        holder.itemView.contentDescription = "${badge.titre}: ${badge.description}"
     }
 
-    override fun getItemCount() = liste.size
-
+    override fun getItemCount() = badges.size
 }

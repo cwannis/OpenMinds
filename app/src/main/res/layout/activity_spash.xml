@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpashActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:gravity="center"
+    tools:context=".SpashActivity">
 
     <ImageView
-        android:layout_gravity="center"
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="98dp" />
+        android:contentDescription="@string/app_name"
+        android:importantForAccessibility="yes"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo" />
 </LinearLayout>

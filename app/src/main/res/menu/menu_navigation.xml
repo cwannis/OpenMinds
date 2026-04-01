@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:icon="@drawable/ic_cercle_nav" android:title="1" />
-    <item android:id="@+id/nav_search" android:icon="@drawable/ic_cercle_nav" android:title="2" />
-    <item android:id="@+id/nav_add" android:icon="@drawable/ic_cercle_nav" android:title="3" />
-    <item android:id="@+id/nav_notifications" android:icon="@drawable/ic_cercle_nav" android:title="4" />
-    <item android:id="@+id/nav_profile" android:icon="@drawable/ic_cercle_nav" android:title="5" />
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_home" android:title="Accueil"/>
+    <item android:id="@+id/nav_formations" android:icon="@drawable/ic_formations" android:title="Formations"/>
+    <item android:id="@+id/nav_profile" android:icon="@drawable/ic_profile" android:title="Profil"/>
 </menu>

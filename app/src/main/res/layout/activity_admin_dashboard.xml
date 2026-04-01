@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar" android:layout_width="0dp" android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" app:titleTextColor="@android:color/white"
+        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+    <ScrollView android:layout_width="0dp" android:layout_height="0dp" android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/toolbar">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="16dp">
+            <TextView android:id="@+id/tvTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Statistiques Globales" android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="16dp"/>
+            <TextView android:id="@+id/tvBenevoles" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvFormateurs" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvFormations" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvSessions" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvInscriptions" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvQuizPasses" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvQuizReussis" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
+            <TextView android:id="@+id/tvTauxReussite" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="16dp"/>
+            <Button android:id="@+id/btnGoHome" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="48dp" android:text="Retour a l'accueil" android:textSize="14sp" android:layout_marginBottom="16dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Inscriptions recentes" android:textSize="18sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerViewRecent"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+            <ProgressBar android:id="@+id/progressBar" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_gravity="center" android:visibility="gone"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

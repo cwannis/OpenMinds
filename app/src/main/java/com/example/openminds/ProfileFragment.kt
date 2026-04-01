@@ -10,18 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
+import coil.load
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,43 +26,45 @@ class ProfileFragment : Fragment() {
             logout(requireContext())
         }
 
-        updatePP(view)
-        updateText(view)
+        val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
+        val name = sharedPref.getString("USER_NAME", "") ?: ""
+        val email = sharedPref.getString("USER_EMAIL", "") ?: ""
+        val role = sharedPref.getString("USER_ROLE", "benevole") ?: "benevole"
+        val ppUrl = sharedPref.getString("USER_PP", "")
+
+        view.findViewById<TextView>(R.id.ProfileName).text = name
+        view.findViewById<TextView>(R.id.ProfileEmail).text = email
+        view.findViewById<TextView>(R.id.ProfileRole).text = when (role) {
+            "admin" -> "Administrateur"
+            "formateur" -> "Formateur"
+            else -> "Benevole"
+        }
+
+        val imgUrl = if (ppUrl.isNullOrEmpty()) {
+            getDefaultAvatar(name)
+        } else ppUrl
+        view.findViewById<ImageView>(R.id.roundedimage).load(imgUrl) {
+            crossfade(true)
+            placeholder(R.drawable.ic_cercle_nav)
+        }
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.allbadge)
         viewLifecycleOwner.lifecycleScope.launch {
-            val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
-            val id = sharedPref.getInt("USER_ID", 0)
-            val mesBadge = getBadgesOfUser(requireContext(), id)
+            val userId = sharedPref.getInt("USER_ID", 0)
+            val badges = getMyBadges(requireContext(), userId)
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = BadgeAdapter(mesBadge)
+            recyclerView.adapter = BadgeAdapter(badges)
         }
     }
 
-    private fun updatePP(view: View) {
-        val roundedimag = view.findViewById<ImageView>(R.id.roundedimage)
-        var ppLink = arguments?.getString("pp")
-
-        if (ppLink.isNullOrEmpty()) {
-            ppLink = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgMC7WWfO9a2eZvPsSkxU4OjNTSgBqaXWjew&s"
-        }
-        Picasso.get()
-            .load(ppLink)
-            .into(roundedimag)
-
-        Glide.with(requireContext())
-            .load(ppLink)
-            .into(roundedimag)
-    }
-
-    private fun updateText(view: View) {
-        val profileName = view.findViewById<TextView>(R.id.ProfileName)
-        val profileOrganization = view.findViewById<TextView>(R.id.ProfileOrganization)
-        val name = arguments?.getString("nom")
-        val orga = arguments?.getString("orga")
-        if (!name.isNullOrEmpty() && !orga.isNullOrEmpty()) {
-            profileName.text = name
-            profileOrganization.text = orga
-        }
+    private fun getDefaultAvatar(name: String): String {
+        val avatars = listOf(
+            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop"
+        )
+        return avatars[Math.abs(name.hashCode()) % avatars.size]
     }
 }

@@ -1,18 +1,33 @@
 <?php
 require_once("bdd.php");
-$name = htmlspecialchars($_GET["name"]);
-$mail = htmlspecialchars($_GET["mail"]);
-$password = sha1(htmlspecialchars($_GET["password"]));
-$orga = htmlspecialchars($_GET["organization"]);
+header('Content-Type: application/json');
 
-if(!empty($name) && !empty($mail) && !empty($password) && !empty($orga)){
-    if(!mailExists($mail, $bdd)) {
-        $insertUser = $bdd->prepare("INSERT INTO user (name, email, password, organization) VALUES (?, ?, ?, ?)");
-        $insertUser->execute(array($name, $mail, $password, $orga));
-        http_response_code(200);
-    } else
-    {
-        http_response_code(401);
+$name = isset($_GET["name"]) ? trim($_GET["name"]) : "";
+$mail = isset($_GET["mail"]) ? trim($_GET["mail"]) : "";
+$password = isset($_GET["password"]) ? $_GET["password"] : "";
 
-    }
+if (empty($name) || empty($mail) || empty($password)) {
+    http_response_code(400);
+    echo json_encode(["erreur" => "Tous les champs sont obligatoires"]);
+    exit;
 }
+
+if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(["erreur" => "Email invalide"]);
+    exit;
+}
+
+if (mailExists($mail, $bdd)) {
+    http_response_code(409);
+    echo json_encode(["erreur" => "Cet email est deja utilise"]);
+    exit;
+}
+
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+$insertUser = $bdd->prepare("INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+$insertUser->execute([$name, $mail, $hashedPassword]);
+
+http_response_code(201);
+echo json_encode(["message" => "Utilisateur cree avec succes"]);
+?>

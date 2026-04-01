@@ -4,7 +4,6 @@ data class User(
     val id: Int,
     val name: String,
     val email: String,
-    val organization : String,
+    val role: String = "benevole",
     val ppLink: String? = ""
-) {
-}
+)
