@@ -23,7 +23,6 @@
         <activity android:name=".ResetPswCode" android:exported="false"/>
         <activity android:name=".ResetPassword" android:exported="false"/>
         <activity android:name=".MainActivity" android:exported="false"/>
-        <activity android:name=".FormationListActivity" android:exported="false"/>
         <activity android:name=".FormateurDashboardActivity" android:exported="false"/>
         <activity android:name=".SessionParticipantsActivity" android:exported="false"/>
         <activity android:name=".AdminDashboardActivity" android:exported="false"/>

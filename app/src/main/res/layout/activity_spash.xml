@@ -9,11 +9,15 @@
     android:gravity="center"
     tools:context=".SpashActivity">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:importantForAccessibility="yes"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.OpenMinds.CircleImage"
+        app:strokeColor="@color/image_border"
+        app:strokeWidth="3dp"
         app:srcCompat="@drawable/logo" />
 </LinearLayout>

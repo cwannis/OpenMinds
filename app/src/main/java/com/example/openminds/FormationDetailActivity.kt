@@ -31,7 +31,7 @@ class FormationDetailActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<MaterialToolbar>(R.id.toolbar).setNavigationOnClickListener {
+        findViewById<MaterialToolbar>(R.id.toolbar)?.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 

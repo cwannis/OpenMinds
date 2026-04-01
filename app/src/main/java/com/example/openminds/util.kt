@@ -95,7 +95,7 @@ suspend fun getUserData(context: Context, id: Int): User {
 
 suspend fun signUp(context: Context, name: String, email: String, psw: String) {
     val status = dataWebRequete.makeRequestWithoutReturn("mailExist.php", mapOf("email" to email))
-    if (status == 401) {
+    if (status == 409) {
         Toast.makeText(context, "Cet email est deja utilise", Toast.LENGTH_SHORT).show()
         return
     }

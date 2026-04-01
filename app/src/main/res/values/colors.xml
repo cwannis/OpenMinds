@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name = "background_text_edit">#E3E3E3</color>
-    <color name = "border_color">#C4C4C4</color>
-    <color name = "text_hint_color">#B3B1B1</color>
-    <color name = "purple">#A160FB</color>
-    <color name = "gray">#DEDEDE</color>
-    <color name = "dark_gray">#C2C2C2</color>
+    <!-- Primary colors - Warm teal for trust and learning -->
+    <color name="primary">#1B6B61</color>
+    <color name="primary_variant">#14524A</color>
+    <color name="primary_light">#E8F5F3</color>
+    <color name="on_primary">#FFFFFF</color>
+    
+    <!-- Secondary colors - Warm accent -->
+    <color name="secondary">#D4845A</color>
+    <color name="secondary_variant">#C2734A</color>
+    <color name="secondary_light">#FFF0E8</color>
+    <color name="on_secondary">#FFFFFF</color>
+    
+    <!-- Background colors -->
+    <color name="background">#F8FAFA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F0F4F4</color>
+    <color name="on_background">#1A1C1C</color>
+    <color name="on_surface">#1A1C1C</color>
+    <color name="on_surface_variant">#5C6666</color>
+    
+    <!-- Status colors -->
+    <color name="success">#2E7D32</color>
+    <color name="error">#C62828</color>
+    <color name="warning">#F57F17</color>
+    <color name="info">#1565C0</color>
+    
+    <!-- Neutral colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_900">#212121</color>
+    
+    <!-- Legacy colors for compatibility -->
+    <color name="purple">#1B6B61</color>
+    <color name="dark_gray">#5C6666</color>
+    <color name="light_gray">#F0F4F4</color>
+    <color name="background_text_edit">#FFFFFF</color>
+    <color name="border_color">#E0E0E0</color>
+    <color name="image_border">#1B6B61</color>
 </resources>

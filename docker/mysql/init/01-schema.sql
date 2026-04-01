@@ -154,7 +154,8 @@ INSERT INTO user (id, name, email, password, role, ppLink) VALUES
 (2, 'Marie Formatrice', 'marie.formatrice@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'formateur', NULL),
 (3, 'Jean Benevole', 'jean.benevole@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'benevole', NULL),
 (4, 'Sophie Benevole', 'sophie.benevole@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'benevole', NULL),
-(5, 'Pierre Formateur', 'pierre.formateur@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'formateur', NULL);
+(5, 'Pierre Formateur', 'pierre.formateur@email.com', '$2y$12$BxsymjgekQkCLIs1.Ci0JuSA.EW3.xkwCerY4GARK2eoqM07MLgNq', 'formateur', NULL),
+(6, 'Compte Test', 'test@test.com', '$2y$12$TrryT2dtw2QLopdUL.bioujXYSwl/mtYB32zMh.wR4ZMkjj2Rc3yK', 'benevole', NULL);
 
 INSERT INTO association (id, name, description, logoUrl, active) VALUES
 (1, 'France Benevolat', 'Reseau national de benevoles.', 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=200&h=200&fit=crop', 1),
@@ -183,7 +184,10 @@ INSERT INTO inscription (id, user_id, session_id, status, inscrit_le) VALUES
 (2, 4, 1, 'inscrit', '2026-03-21 14:00:00'),
 (3, 3, 3, 'termine', '2026-03-15 09:00:00'),
 (4, 4, 3, 'present', '2026-03-15 09:30:00'),
-(5, 3, 5, 'inscrit', '2026-03-25 11:00:00');
+(5, 3, 5, 'inscrit', '2026-03-25 11:00:00'),
+(6, 6, 2, 'inscrit', '2026-03-26 10:15:00'),
+(7, 6, 4, 'present', '2026-03-27 09:40:00'),
+(8, 6, 7, 'termine', '2026-03-28 16:20:00');
 
 INSERT INTO quiz (id, formation_id, titre, passing_score) VALUES
 (1, 1, 'Quiz - Inclusion sociale', 60),
@@ -210,7 +214,9 @@ INSERT INTO quiz_result (id, user_id, quiz_id, score, total_questions, passed, d
 (1, 3, 1, 3, 3, 1, '2026-04-16 12:30:00'),
 (2, 3, 2, 2, 3, 1, '2026-04-11 11:30:00'),
 (3, 4, 2, 3, 3, 1, '2026-04-11 11:45:00'),
-(4, 3, 4, 2, 2, 1, '2026-04-23 15:00:00');
+(4, 3, 4, 2, 2, 1, '2026-04-23 15:00:00'),
+(5, 6, 3, 2, 3, 1, '2026-03-29 17:00:00'),
+(6, 6, 5, 2, 2, 1, '2026-03-30 18:10:00');
 
 INSERT INTO badge (id, titre, description, imageUrl, thematique) VALUES
 (1, 'Inclusion', 'Formation Inclusion Sociale validee', 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=100&h=100&fit=crop', 'Inclusion'),
@@ -227,7 +233,9 @@ INSERT INTO abadge (idBadge, idUser, dateObtention) VALUES
 (1, 3, '2026-04-16 12:30:00'),
 (2, 3, '2026-04-11 11:30:00'),
 (4, 3, '2026-04-23 15:00:00'),
-(2, 4, '2026-04-11 11:45:00');
+(2, 4, '2026-04-11 11:45:00'),
+(3, 6, '2026-03-29 17:05:00'),
+(6, 6, '2026-03-30 18:15:00');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

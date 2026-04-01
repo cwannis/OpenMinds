@@ -2,6 +2,8 @@ package com.example.openminds
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +18,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class FormationListFragment : Fragment() {
     private lateinit var adapter: FormationListAdapter
     private val formations = mutableListOf<Formation>()
+    private var selectedThematique = ""
+    private var searchQuery = ""
+    private var searchDebounceJob: Job? = null
+    private var loadRequestId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,8 +62,8 @@ class FormationListFragment : Fragment() {
 
                 spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                        val theme = if (pos == 0) "" else items[pos]
-                        loadFormations(theme, "", progressBar)
+                        selectedThematique = if (pos == 0) "" else items[pos]
+                        loadFormations(selectedThematique, searchQuery, progressBar)
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
@@ -66,23 +74,44 @@ class FormationListFragment : Fragment() {
             }
         }
 
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+
+            override fun afterTextChanged(s: Editable?) {
+                searchQuery = s?.toString()?.trim().orEmpty()
+                searchDebounceJob?.cancel()
+                searchDebounceJob = lifecycleScope.launch {
+                    delay(300)
+                    loadFormations(selectedThematique, searchQuery, progressBar)
+                }
+            }
+        })
+
         searchBtn.setOnClickListener {
-            val query = searchInput.text.toString().trim()
-            loadFormations("", query, progressBar)
+            searchQuery = searchInput.text.toString().trim()
+            searchDebounceJob?.cancel()
+            loadFormations(selectedThematique, searchQuery, progressBar)
         }
     }
 
     private fun loadFormations(thematique: String, search: String, progressBar: ProgressBar) {
+        val requestId = ++loadRequestId
         progressBar.visibility = View.VISIBLE
         lifecycleScope.launch {
             try {
+                val data = getAllFormations(requireContext(), thematique, search)
+                if (requestId != loadRequestId) return@launch
+
                 formations.clear()
-                formations.addAll(getAllFormations(requireContext(), thematique, search))
+                formations.addAll(data)
                 adapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
-                progressBar.visibility = View.GONE
+                if (requestId == loadRequestId) {
+                    progressBar.visibility = View.GONE
+                }
             }
         }
     }
