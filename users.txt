@@ -2,6 +2,10 @@ benevole:
 jean.benevole@email.com
 test123
 
+test:
+test@test.com
+test
+
 formatrice:
 marie.formatrice@email.com
 test123
@@ -9,3 +13,4 @@ test123
 admin:
 admin@openminds.local
 admin
+
