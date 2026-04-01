@@ -12,26 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenMinds"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SpashActivity" android:exported="true">
+        <activity android:name=".Main.SpashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".LogInActivity" android:exported="true"/>
-        <activity android:name=".RegisterActivity" android:exported="true"/>
-        <activity android:name=".ResetPswCode" android:exported="false"/>
-        <activity android:name=".ResetPassword" android:exported="false"/>
-        <activity android:name=".MainActivity" android:exported="false"/>
-        <activity android:name=".FormateurDashboardActivity" android:exported="false"/>
-        <activity android:name=".SessionParticipantsActivity" android:exported="false"/>
-        <activity android:name=".AdminDashboardActivity" android:exported="false"/>
-        <activity android:name=".FormationDetailActivity" android:exported="false"/>
-        <activity android:name=".SessionListActivity" android:exported="false"/>
-        <activity android:name=".QuizActivity" android:exported="false"/>
-        <activity android:name=".MyInscriptionsActivity" android:exported="false"/>
-        <activity android:name=".ProgressionActivity" android:exported="false"/>
-        <activity android:name=".MyBadgesActivity" android:exported="false"/>
-        <activity android:name=".ProfileActivity" android:exported="false"/>
+        <activity android:name=".loginLoout.LogInActivity" android:exported="true"/>
+        <activity android:name=".loginLoout.RegisterActivity" android:exported="true"/>
+        <activity android:name=".loginLoout.ResetPswCode" android:exported="false"/>
+        <activity android:name=".loginLoout.ResetPassword" android:exported="false"/>
+        <activity android:name=".Main.MainActivity" android:exported="false"/>
+        <activity android:name=".formation.FormateurDashboardActivity" android:exported="false"/>
+        <activity android:name=".formation.SessionParticipantsActivity" android:exported="false"/>
+        <activity android:name=".admin.AdminDashboardActivity" android:exported="false"/>
+        <activity android:name=".formation.FormationDetailActivity" android:exported="false"/>
+        <activity android:name=".session.SessionListActivity" android:exported="false"/>
+        <activity android:name=".formation.QuizActivity" android:exported="false"/>
+        <activity android:name=".loginLoout.MyInscriptionsActivity" android:exported="false"/>
+        <activity android:name=".formation.ProgressionActivity" android:exported="false"/>
+        <activity android:name=".badge.MyBadgesActivity" android:exported="false"/>
+        <activity android:name=".session.ProfileActivity" android:exported="false"/>
     </application>
 </manifest>
