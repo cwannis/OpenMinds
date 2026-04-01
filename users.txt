@@ -1,0 +1,11 @@
+benevole:
+jean.benevole@email.com
+test123
+
+formatrice:
+marie.formatrice@email.com
+test123
+
+admin:
+admin@openminds.local
+admin
