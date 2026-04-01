@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -9,15 +8,12 @@
     android:gravity="center"
     tools:context=".SpashActivity">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:importantForAccessibility="yes"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.OpenMinds.CircleImage"
-        app:strokeColor="@color/image_border"
-        app:strokeWidth="3dp"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/logo" />
 </LinearLayout>

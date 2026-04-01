@@ -15,7 +15,7 @@ $stmt = $bdd->prepare("
            COUNT(DISTINCT s.id) as nb_sessions,
            COUNT(DISTINCT i.id) as nb_inscrits,
            COUNT(DISTINCT qr.id) as nb_quiz_passes,
-           COALESCE(SUM(CASE WHEN qr.passed = 1 THEN 1 ELSE 0 END), 0) as nb_quiz_reussis
+           COUNT(DISTINCT CASE WHEN qr.passed = 1 THEN qr.id END) as nb_quiz_reussis
     FROM formation f
     LEFT JOIN session s ON f.id = s.formation_id AND s.formateur_id = ?
     LEFT JOIN inscription i ON s.id = i.session_id
