@@ -3,6 +3,7 @@ package com.example.openminds
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -32,6 +33,13 @@ class FormateurDashboardActivity : AppCompatActivity() {
 
         findViewById<MaterialToolbar>(R.id.toolbar).setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        findViewById<Button>(R.id.btnGoHome).setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            })
+            finish()
         }
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewSessions)

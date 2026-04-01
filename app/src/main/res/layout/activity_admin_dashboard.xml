@@ -21,6 +21,8 @@
             <TextView android:id="@+id/tvQuizPasses" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
             <TextView android:id="@+id/tvQuizReussis" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp"/>
             <TextView android:id="@+id/tvTauxReussite" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="16dp"/>
+            <Button android:id="@+id/btnGoHome" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="48dp" android:text="Retour a l'accueil" android:textSize="14sp" android:layout_marginBottom="16dp"/>
             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:text="Inscriptions recentes" android:textSize="18sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
             <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerViewRecent"

@@ -32,6 +32,13 @@ class AdminDashboardActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        findViewById<android.widget.Button>(R.id.btnGoHome).setOnClickListener {
+            startActivity(android.content.Intent(this, MainActivity::class.java).apply {
+                flags = android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            })
+            finish()
+        }
+
         recyclerView = findViewById(R.id.recyclerViewRecent)
         recyclerView.layoutManager = LinearLayoutManager(this)
 

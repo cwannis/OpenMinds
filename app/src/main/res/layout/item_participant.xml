@@ -11,5 +11,17 @@
             android:layout_marginTop="4dp" android:textSize="14sp" tools:text="jean@email.com"/>
         <TextView android:id="@+id/tvParticipantStatus" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="4dp" android:textSize="14sp" tools:text="Inscrit"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:orientation="horizontal">
+            <Button android:id="@+id/btnPresent" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:minHeight="36dp" android:text="Present" android:textSize="12sp"
+                android:layout_marginEnd="4dp"/>
+            <Button android:id="@+id/btnAbsent" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:minHeight="36dp" android:text="Absent" android:textSize="12sp"
+                android:layout_marginHorizontal="4dp"/>
+            <Button android:id="@+id/btnTermine" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:minHeight="36dp" android:text="Termine" android:textSize="12sp"
+                android:layout_marginStart="4dp"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

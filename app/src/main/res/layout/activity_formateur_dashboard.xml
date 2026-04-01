@@ -14,9 +14,13 @@
         android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="8dp"
         android:textSize="14sp" android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+    <Button android:id="@+id/btnGoHome" android:layout_width="0dp" android:layout_height="wrap_content"
+        android:minHeight="48dp" android:text="Retour a l'accueil" android:textSize="14sp"
+        android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tvStatsSummary"/>
     <ProgressBar android:id="@+id/progressBar" android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:visibility="gone" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerViewSessions"
         android:layout_width="0dp" android:layout_height="0dp" android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tvStatsSummary"/>
+        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/btnGoHome"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

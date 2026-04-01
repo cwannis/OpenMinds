@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -18,8 +19,6 @@ class HomeFragment : Fragment() {
     private val trendingFormations = mutableListOf<Formation>()
     private lateinit var suggestionsAdapter: FormationHorizontalAdapter
     private val suggestionsFormations = mutableListOf<Formation>()
-    private lateinit var allAdapter: FormationListAdapter
-    private val allFormations = mutableListOf<Formation>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +30,23 @@ class HomeFragment : Fragment() {
 
         val sharedPref = requireContext().getSharedPreferences("OpenMindsPrefs", android.content.Context.MODE_PRIVATE)
         val userName = sharedPref.getString("USER_NAME", "") ?: ""
+        val role = sharedPref.getString("USER_ROLE", "benevole") ?: "benevole"
         view.findViewById<TextView>(R.id.welcomeText).text = "Bienvenue, $userName"
+
+        val btnDashboard = view.findViewById<Button>(R.id.btnDashboard)
+        if (role == "formateur") {
+            btnDashboard.text = "Mes Sessions"
+            btnDashboard.visibility = View.VISIBLE
+            btnDashboard.setOnClickListener {
+                startActivity(Intent(requireContext(), FormateurDashboardActivity::class.java))
+            }
+        } else if (role == "admin") {
+            btnDashboard.text = "Tableau de bord"
+            btnDashboard.visibility = View.VISIBLE
+            btnDashboard.setOnClickListener {
+                startActivity(Intent(requireContext(), AdminDashboardActivity::class.java))
+            }
+        }
 
         trendingAdapter = FormationHorizontalAdapter(trendingFormations) { openFormation(it) }
         view.findViewById<RecyclerView>(R.id.recyclerViewTrending).apply {
@@ -45,10 +60,11 @@ class HomeFragment : Fragment() {
             adapter = suggestionsAdapter
         }
 
-        allAdapter = FormationListAdapter(allFormations) { openFormation(it) }
-        view.findViewById<RecyclerView>(R.id.recyclerViewAll).apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = allAdapter
+        view.findViewById<Button>(R.id.btnSeeAll).setOnClickListener {
+            (activity as? MainActivity)?.let {
+                it.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
+                    .selectedItemId = R.id.nav_formations
+            }
         }
 
         loadData()
@@ -75,10 +91,6 @@ class HomeFragment : Fragment() {
                 suggestionsFormations.clear()
                 suggestionsFormations.addAll(others.take(4))
                 suggestionsAdapter.notifyDataSetChanged()
-
-                allFormations.clear()
-                allFormations.addAll(all)
-                allAdapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             }

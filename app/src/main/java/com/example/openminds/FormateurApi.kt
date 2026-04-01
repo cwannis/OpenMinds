@@ -13,3 +13,12 @@ suspend fun getSessionParticipants(context: Context, sessionId: Int): List<Parti
 suspend fun getFormateurStats(context: Context, userId: Int): List<FormateurStat> {
     return dataWebRequete.makeRequest<FormateurStat>("getFormateurStats.php", mapOf("user_id" to userId.toString()))
 }
+
+suspend fun updateParticipantStatus(context: Context, formateurId: Int, participantId: Int, sessionId: Int, status: String): Int {
+    return dataWebRequete.makeRequestWithoutReturn("updateParticipantStatus.php", mapOf(
+        "formateur_id" to formateurId.toString(),
+        "participant_id" to participantId.toString(),
+        "session_id" to sessionId.toString(),
+        "status" to status
+    ))
+}

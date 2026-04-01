@@ -55,17 +55,7 @@ class LogInActivity : AppCompatActivity() {
         finish()
     }
 
-    fun showPassword(view: View) {
-        val input = findViewById<EditText>(R.id.mdpText)
-        val text = findViewById<TextView>(R.id.showPasswordButton)
-        if (input.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-            input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            text.text = "hide"
-        } else {
-            input.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            text.text = "show"
-        }
-    }
+
 
     fun goToResetPswCode(view: View) {
         val emailInput = findViewById<EditText>(R.id.editTextTextEmailAddress2).text.toString()

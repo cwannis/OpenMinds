@@ -16,6 +16,10 @@ import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.launch
 
 class SessionParticipantsActivity : AppCompatActivity() {
+    private var sessionId = 0
+    private lateinit var adapter: ParticipantAdapter
+    private val participants = mutableListOf<Participant>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,24 +34,60 @@ class SessionParticipantsActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        val sessionId = intent.getIntExtra("SESSION_ID", 0)
+        sessionId = intent.getIntExtra("SESSION_ID", 0)
         val sessionTitle = intent.getStringExtra("SESSION_TITLE") ?: ""
         findViewById<TextView>(R.id.tvSessionTitle).text = sessionTitle
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewParticipants)
+        adapter = ParticipantAdapter(participants) { participant, newStatus ->
+            updateStatus(participant.user_id, newStatus)
+        }
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
+        loadParticipants()
+    }
+
+    private fun loadParticipants() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             try {
-                val participants = getSessionParticipants(this@SessionParticipantsActivity, sessionId)
-                recyclerView.adapter = ParticipantAdapter(participants)
+                participants.clear()
+                participants.addAll(getSessionParticipants(this@SessionParticipantsActivity, sessionId))
+                adapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 Toast.makeText(this@SessionParticipantsActivity, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             } finally {
                 progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun updateStatus(participantId: Int, newStatus: String) {
+        lifecycleScope.launch {
+            try {
+                val formateurId = getUserId(this@SessionParticipantsActivity)
+                val status = updateParticipantStatus(this@SessionParticipantsActivity, formateurId, participantId, sessionId, newStatus)
+                if (status == 200) {
+                    val idx = participants.indexOfFirst { it.user_id == participantId }
+                    if (idx >= 0) {
+                        participants[idx] = participants[idx].copy(status = newStatus)
+                        adapter.notifyItemChanged(idx)
+                    }
+                    val label = when (newStatus) {
+                        "present" -> "Present"
+                        "absent" -> "Absent"
+                        "termine" -> "Termine"
+                        else -> newStatus
+                    }
+                    Toast.makeText(this@SessionParticipantsActivity, "Statut mis a jour: $label", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@SessionParticipantsActivity, "Erreur lors de la mise a jour", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@SessionParticipantsActivity, "Erreur: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
